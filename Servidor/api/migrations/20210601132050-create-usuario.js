@@ -10,11 +10,12 @@ module.exports = {
       },
       nome: {
         type: Sequelize.STRING(45),
-        allowNull:false
+        allowNull:false,
       },
       cpf: {
         type: Sequelize.STRING(11),
-        allowNull:false
+        allowNull:false,
+        unique:true
       },
       createdAt: {
         allowNull: false,

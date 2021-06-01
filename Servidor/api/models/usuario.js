@@ -12,15 +12,28 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Usuario.hasMany(models.Login,{
         foreignKey:'usuario_id'
-      })
+      },
+      { onDelete: 'cascade' })
     }
   };
   Usuario.init({
-    nome: DataTypes.STRING,
-    cpf: DataTypes.STRING
+    nome:{
+      type:DataTypes.STRING,
+      validate:{
+        is: ["^[a-z]+$",'i']
+      } 
+    }, 
+    cpf:{
+      type:DataTypes.STRING,
+      validate:{
+        isNumeric: true,
+        len: [11, 11]
+      }
+    }
   }, {
     sequelize,
     modelName: 'Usuario',
-  });
+  },{underscored: true,
+    underscoredAll: true});
   return Usuario;
 };
