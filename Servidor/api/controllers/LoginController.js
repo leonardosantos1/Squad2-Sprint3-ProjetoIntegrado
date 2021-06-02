@@ -2,8 +2,6 @@ const database =  require('../models')
 
 
 module.exports = {
-
-
     async listar(req,res){
         try{
             const login = await database.Login.findAll()

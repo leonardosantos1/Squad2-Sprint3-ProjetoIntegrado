@@ -4,7 +4,7 @@
   "description": "Projeto integrado da squade 2 na sprint 3",
   "main": "index.js",
   "scripts": {
-    "start":"nodemon ./Servidor/api/server.js",
+    "start": "nodemon ./Servidor/api/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

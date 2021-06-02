@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey:'usuario_id',
         onDelete: 'CASCADE'
       })
+      Usuario.hasOne(models.Item_usuario,{
+        foreignKey:'usuario_id',
+        onDelete:'CASCADE'
+      })
     }
   };
   Usuario.init({
