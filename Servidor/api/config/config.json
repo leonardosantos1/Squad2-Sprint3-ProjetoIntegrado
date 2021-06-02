@@ -4,11 +4,7 @@
     "password": "admin",
     "database": "controle",
     "host": "127.0.0.1",
-    "dialect": "mysql",
-    "define": {
-      "underscored": true,
-      "underscoredAll":true
-      }
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
