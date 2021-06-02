@@ -20,7 +20,10 @@ module.exports = (sequelize, DataTypes) => {
     nome:{
       type:DataTypes.STRING,
       validate:{
-        is: ["^[a-z]+$",'i']
+        is: { 
+              args:/^[a-z ,.'-]+$/i
+             // msg: "Nome invalido"
+            }//isso ficou foda :)
       } 
     }, 
     cpf:{
@@ -36,3 +39,4 @@ module.exports = (sequelize, DataTypes) => {
   });
   return Usuario;
 };
+

@@ -17,8 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     categoria:{
       type:DataTypes.STRING,
       validate: { 
-         isAlpha: true, 
-         notEmpty: true
+         isAlpha: true
       }
     }
   },

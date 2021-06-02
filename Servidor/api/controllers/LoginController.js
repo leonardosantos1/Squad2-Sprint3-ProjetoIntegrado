@@ -3,6 +3,16 @@ const database =  require('../models')
 
 module.exports = {
 
+
+    async listar(req,res){
+        try{
+            const login = await database.Login.findAll()
+            return res.status(200).json(login)
+        }catch(error){
+            return res.status(400).json({erro:error.message})
+        }
+    },
+
     async criarLogin(req,res){
         try{
             if(req.is('json')){
