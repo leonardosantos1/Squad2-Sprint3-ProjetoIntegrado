@@ -20,6 +20,7 @@ module.exports= {
                 throw new Error ("Desculpe, mas nao foi possivel inserir um novo usuario!")
             } 
         }catch(error){
+            console.log(error.message)
             return res.status(400).json({erro:error.message})
         }
     },
