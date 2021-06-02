@@ -15,15 +15,16 @@ module.exports = {
       usuario_id:{
         type: Sequelize.INTEGER,
         allowNull:false,
-        references:{model:'Usuarios', key:'id'}
+        references:{model:'Usuarios', key:'id'},
+        onDelete:'CASCADE'
       },
-      createdAt: {
+      created_At: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
-      updatedAt: {
+      updated_At: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       }
     });
   },
