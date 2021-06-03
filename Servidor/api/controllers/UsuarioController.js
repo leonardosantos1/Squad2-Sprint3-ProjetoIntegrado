@@ -3,10 +3,18 @@ const database = require('../models')
 
 module.exports= {
 
-    async listarUsuario(req,res){
+    async listarUsuarios(req,res){
         try{
             const usuarios = await database.Usuario.findAll()
             return res.status(200).json(usuarios)
+        }catch(error){
+            return res.status(400).json({erro:error.message})
+        }
+    },
+    async listarUsuario(req,res){
+        try{
+            const usuario = await database.Usuario.findByPk(req.params.id)
+            return res.status(200).json(usuario)
         }catch(error){
             return res.status(400).json({erro:error.message})
         }

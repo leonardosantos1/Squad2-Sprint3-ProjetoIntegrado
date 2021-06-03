@@ -11,11 +11,16 @@ module.exports = {
       data_reserva: {
         type: Sequelize.DATE,
         unique:true
-      
       },
       checkout: {
         type: Sequelize.DATE,
         unique:true
+      },
+      item_usuario_id:{
+        type: Sequelize.INTEGER,
+        allowNull:false,
+        references:{model:'item_usuarios', key:'id'},
+        onDelete:'CASCADE'
       },
       createdAt: {
         allowNull: false,

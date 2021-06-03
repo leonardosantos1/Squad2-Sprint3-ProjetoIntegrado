@@ -18,7 +18,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey:'usuario_id',
         onDelete:'CASCADE'
       })
-
+      item_usuario.hasMany(models.Reserva,{
+        foreignKey:'item_usuario_id',
+        onDelete:'CASCADE'
+      })
     }
   };
   item_usuario.init({

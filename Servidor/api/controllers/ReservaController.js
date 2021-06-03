@@ -1,28 +1,28 @@
 const database =  require('../models')
 
 module.exports = {
-    async listarItens(req,res){
+    async listarReservas(req,res){
         try{
-            const itens = await database.Item.findAll()
-            return res.status(200).json(itens)
+            const reservas = await database.Reserva.findAll()
+            return res.status(200).json(reservas)
         }catch(error){
-            return res.status(400).json({erro:'Desculpe, mas não foi possivel listar os itens'})
+            return res.status(400).json({erro:error.message})
         }
     },
-    async listarItem(req,res){
+    async listarReserva(req,res){
         try{
-            const item = await database.Item.findByPk(req.params.id)
-            return res.status(200).json(item)
+            const reserva = await database.Reserva.findByPk(req.params.id)
+            return res.status(200).json(reserva)
         }catch(error){
-            return res.status(400).json({erro:'Desculpe, mas não foi possivel buscar o item desejado'})
+            return res.status(400).json({erro:error.message})
         }
     },
-    async inserirItem(req,res){
+    async inserirReserva(req,res){
         try{
             if(req.is('json')){
-                const item = await database.Item.create(req.body)
+                const reserva = await database.Reserva.create(req.body)
                 console.log(req.body)
-            return res.status(201).json(item)
+            return res.status(201).json(reserva)
             }else{
                 throw new Error ("Desculpe, mas nao foi possivel inserir um novo usuario!")
             } 
@@ -30,12 +30,12 @@ module.exports = {
             return res.status(400).json({erro:error.message})
         }
     },
-    async atualizarItem(req,res){
+    async atualizarReserva(req,res){
         try{
             if(req.is('json')){
-                const item = await database.Item.findByPk(req.params.id)
-                await item.update(req.body)
-                res.status(200).json(item)
+                const reserva = await database.Reserva.findByPk(req.params.id)
+                await reserva.update(req.body)
+                res.status(200).json(reserva)
             }else{
                 throw new Error("Desculpe, mas nao foi possivel inserir um novo usuario!")
             }
@@ -45,10 +45,10 @@ module.exports = {
 
     },
 
-    async deletarItem(req,res){
+    async deletarReserva(req,res){
         try{
-            const item = await database.Item.findByPk(req.params.id)
-            await item.destroy(req.body)
+            const reserva = await database.Reserva.findByPk(req.params.id)
+            await reserva.destroy(req.body)
             return res.status(200).send()
         }catch(error){
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel deletar um novo usuario!"})
