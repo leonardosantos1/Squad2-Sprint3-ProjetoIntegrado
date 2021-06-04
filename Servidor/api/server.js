@@ -1,4 +1,5 @@
 require('dotenv').config()
+const middlewaresAutenticacao = require('./estrategiaLogin/middlewares-autenticacao')
 
 const express =  require('express')
 

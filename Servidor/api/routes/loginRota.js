@@ -1,9 +1,10 @@
 const router = require('express').Router()
 const passport = require('passport')
 const loginController = require('../controllers/LoginController')
+const middlewaresAutenticacao = require('../estrategiaLogin/middlewares-autenticacao')
 
 
-router.post('/',passport.authenticate('local',{session: false}),loginController.login )
+router.post('/',middlewaresAutenticacao.local,loginController.login )
 
 router.get('/listar',loginController.listar)
 router.post('/criar',loginController.criarLogin)
