@@ -1,11 +1,12 @@
 const router = require('express').Router()
 const itemController = require("../controllers/ItemController")
+const passport = require('passport')
 
 router.get("/listar",itemController.listarItens)
 router.get("/buscar/:id",itemController.listarItem)
-router.post('/inserir',itemController.inserirItem)
-router.put('/atualizar/:id',itemController.atualizarItem)
-router.delete("/deletar/:id",itemController.deletarItem)
+router.post('/inserir',passport.authenticate('bearer',{session:false}),itemController.inserirItem)
+router.put('/atualizar/:id',passport.authenticate('bearer',{session:false}),itemController.atualizarItem)
+router.delete("/deletar/:id",passport.authenticate('bearer',{session:false}),itemController.deletarItem)
 
 module.exports = router
 

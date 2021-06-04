@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express =  require('express')
 
 const app  = express()
@@ -8,6 +10,9 @@ const rotaTipo =  require('./routes/tipoRota')
 const rotaItem =  require('./routes/itemRota')
 const rotaItemUsuario =  require('./routes/itemUsuarioRota')
 const rotaReserva =  require('./routes/reservaRota')
+
+const {estrategiaAutenticacao} = require('./estrategiaLogin')
+
 
 
 app.use(express.json())
