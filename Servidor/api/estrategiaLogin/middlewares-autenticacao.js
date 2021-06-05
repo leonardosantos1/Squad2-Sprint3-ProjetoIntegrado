@@ -40,11 +40,11 @@ module.exports={
                 if(!usuario){
                     return res.status(401).json()
                 }
-
-                req.user = usuario;
-                return next;
+                console.log(req)
+                req.body = usuario;
+                return next();
             }
-        )(req,res,next)
+        )(req,res,next);
     }
        
 }

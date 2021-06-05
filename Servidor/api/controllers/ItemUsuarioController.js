@@ -1,10 +1,12 @@
 const database = require('../models')
 
 
+
 module.exports = {
     async listarItensUsuario(req,res){
         try{
             const itensUsu = await database.item_usuario.findAll()
+            //console.log()
             return res.status(200).json(itensUsu)
         }catch(error){
             return res.status(400).json({erro:error.message})
@@ -24,7 +26,7 @@ module.exports = {
                 const itemUsu = await database.item_usuario.create(req.body)
             return res.status(201).json(itemUsu)
             }else{
-                throw new Error ("Desculpe, mas nao foi possivel inserir um novo usuario!")
+                throw new Error ("Desculpe, mas nao foi possivel inserir!")
             } 
         }catch(error){
             return res.status(400).json({erro:error.message})
@@ -37,10 +39,10 @@ module.exports = {
                 await itemUsu.update(req.body)
                 res.status(200).json(itemUsu)
             }else{
-                throw new Error("Desculpe, mas nao foi possivel inserir um novo usuario!")
+                throw new Error("Desculpe, mas nao foi possivel inserir!")
             }
         }catch(error){
-            return res.status(400).json({erro:"Desculpe, mas nao foi possivel atualizar um novo usuario!"})
+            return res.status(400).json({erro:"Desculpe, mas nao foi possivel atualizar!"})
         }
 
     },
@@ -51,8 +53,17 @@ module.exports = {
             await itemUsu.destroy(req.body)
             return res.status(200).send()
         }catch(error){
-            return res.status(400).json({erro:"Desculpe, mas nao foi possivel deletar um novo usuario!"})
+            return res.status(400).json({erro:"Desculpe, mas nao foi possivel deletar!"})
         }
 
     }
+}
+
+
+function usuariosNome(arr){
+    let usuario = [];
+    for(i=0;i<arr.length;i++){
+        usuario.push({nome: arr[i].nome, cpf: arr[i].cpf})
+    }
+    return usuario
 }
