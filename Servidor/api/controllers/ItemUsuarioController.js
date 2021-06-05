@@ -1,10 +1,12 @@
 const database = require('../models')
 
 
+
 module.exports = {
     async listarItensUsuario(req,res){
         try{
             const itensUsu = await database.item_usuario.findAll()
+            //console.log()
             return res.status(200).json(itensUsu)
         }catch(error){
             return res.status(400).json({erro:error.message})
@@ -55,4 +57,13 @@ module.exports = {
         }
 
     }
+}
+
+
+function usuariosNome(arr){
+    let usuario = [];
+    for(i=0;i<arr.length;i++){
+        usuario.push({nome: arr[i].nome, cpf: arr[i].cpf})
+    }
+    return usuario
 }

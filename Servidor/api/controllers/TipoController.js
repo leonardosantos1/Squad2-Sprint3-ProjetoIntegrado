@@ -21,7 +21,6 @@ module.exports = {
         try{
             if(req.is('json')){
                 const tipo = await database.Tipo.create(req.body)
-                console.log(req.body)
             return res.status(201).json(tipo)
             }else{
                 throw new Error ("Desculpe, mas nao foi possivel inserir!")
