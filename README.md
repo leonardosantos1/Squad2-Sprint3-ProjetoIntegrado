@@ -7,3 +7,17 @@ O comando para conseguir rodar todas as migrations use o "npx sequelize-cli db:m
 
 Gerar chave alheatoria JWT:
  node -e "console.log( require('crypto').randomBytes(256).toString('base64'))" 
+
+Tabelas:
+    -tipo (Gustavo)
+    -Usuario (Vinicius)
+    -item, item_usuario, login e resrerva (Leonardo)
+
+Migration e model:
+    -Leonardo
+
+JWT:
+    -Vinicius
+
+Tratamento de dados:
+    -Gustavo
