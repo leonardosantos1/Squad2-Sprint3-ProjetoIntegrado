@@ -23,7 +23,7 @@ module.exports= {
         try{
             if(req.is('json')){
                 const usuario = await database.Usuario.create(req.body)
-            return res.status(201).json({nome: usuario.nome, cpf: usuario.cpf})
+            return res.status(201).json({id:usuario.id,nome: usuario.nome, cpf: usuario.cpf})
             }else{
                 throw new Error ("Desculpe, mas nao foi possivel inserir um novo usuario!")
             } 
