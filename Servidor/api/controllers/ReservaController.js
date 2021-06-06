@@ -4,7 +4,7 @@ module.exports = {
     async listarReservas(req,res){
         try{
             const reservas = await database.Reserva.findAll()
-            return res.status(200).json(reservas)
+            return res.status(200).json(ReservaNome(reservas))
         }catch(error){
             return res.status(400).json({erro:error.message})
         }
@@ -12,7 +12,7 @@ module.exports = {
     async listarReserva(req,res){
         try{
             const reserva = await database.Reserva.findByPk(req.params.id)
-            return res.status(200).json(reserva)
+            return res.status(200).json(trataReserva(reserva))
         }catch(error){
             return res.status(400).json({erro:error.message})
         }
@@ -22,7 +22,7 @@ module.exports = {
             if(req.is('json')){
                 const reserva = await database.Reserva.create(req.body)
                 console.log(req.body)
-            return res.status(201).json(reserva)
+            return res.status(201).json(trataReserva(reserva))
             }else{
                 throw new Error ("Desculpe, mas nao foi possivel inserir um novo usuario!")
             } 
@@ -35,7 +35,7 @@ module.exports = {
             if(req.is('json')){
                 const reserva = await database.Reserva.findByPk(req.params.id)
                 await reserva.update(req.body)
-                res.status(200).json(reserva)
+                res.status(200).json(trataReserva(reserva))
             }else{
                 throw new Error("Desculpe, mas nao foi possivel inserir um novo usuario!")
             }
@@ -49,10 +49,20 @@ module.exports = {
         try{
             const reserva = await database.Reserva.findByPk(req.params.id)
             await reserva.destroy(req.body)
-            return res.status(200).send()
+            return res.status(200).send("Reserva deletada")
         }catch(error){
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel deletar um novo usuario!"})
         }
 
     }
 }
+
+function ReservaNome(arr){
+    let reserva = [];
+    for(i=0;i<arr.length;i++){
+        reserva.push({data_reserva: arr[i].data_reserva, checkout: arr[i].checkout, item_usuario_id: arr[i].item_usuario_id})
+    }
+    return reserva
+}
+
+function trataReserva(reserva){ return {data_reserva:reserva.data_reserva,checkout:reserva.checkout,item_usuario_id:reserva.item_usuario_id}}
