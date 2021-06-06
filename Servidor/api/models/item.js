@@ -9,7 +9,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey:'item_id',
         onDelete: 'CASCADE'
       })
-      
       Item.belongsTo(models.Tipo,{
         foreignKey:'tipo_id',
         onDelete:'CASCADE'
@@ -17,7 +16,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Item.init({
-    numeracao: DataTypes.INTEGER
+    numeracao:{
+      type:DataTypes.STRING,
+      validate:{
+        isNumeric: true
+      }
+    }
   }, {
     sequelize,
     modelName: 'Item',

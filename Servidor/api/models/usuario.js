@@ -27,8 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       validate:{
         is: { 
               args:/^[a-z ,.'-]+$/i
-             // msg: "Nome invalido"
-            }//isso ficou foda :)
+            }
       } 
     }, 
     cpf:{

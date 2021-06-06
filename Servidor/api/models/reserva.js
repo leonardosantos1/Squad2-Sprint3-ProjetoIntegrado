@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey:'item_usuario_id',
         onDelete:'CASCADE'
       })
-
     }
   };
   Reserva.init({
