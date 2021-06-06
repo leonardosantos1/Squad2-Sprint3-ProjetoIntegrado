@@ -8,7 +8,6 @@ module.exports = (sequelize, DataTypes) => {
       Login.belongsTo(models.Usuario,{
         foreignKey:'usuario_id'
       })
-
     }
   };
   Login.init({

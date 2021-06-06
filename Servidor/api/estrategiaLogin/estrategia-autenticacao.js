@@ -41,7 +41,6 @@ passport.use(
         async (token,done)=>{
             try {
                 const payload = jwt.verify(token, process.env.CHAVE_JWT)
-                console.log(payload.id)
                 const login = await db.Login.findByPk(payload.id)
                 done(null,login)
             } catch (error) {

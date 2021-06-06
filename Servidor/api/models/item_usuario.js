@@ -20,8 +20,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   item_usuario.init({
-    item_id: DataTypes.INTEGER,
-    usuario_id: DataTypes.INTEGER
+    item_id:{
+      type:DataTypes.STRING,
+      validate:{
+        isNumeric: true,
+      }
+    },
+    usuario_id:{
+      type:DataTypes.STRING,
+      validate:{
+        isNumeric: true,
+      }
+    }
   }, {
     sequelize,
     modelName: 'item_usuario',

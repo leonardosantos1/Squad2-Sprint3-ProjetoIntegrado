@@ -9,7 +9,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       numeracao: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull:false
       },
       tipo_id:{
         type: Sequelize.INTEGER,
