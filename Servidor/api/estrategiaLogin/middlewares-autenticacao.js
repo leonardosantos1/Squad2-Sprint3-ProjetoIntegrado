@@ -40,8 +40,7 @@ module.exports={
                 if(!usuario){
                     return res.status(401).json()
                 }
-                console.log(req)
-                req.body = usuario;
+                req.user = usuario;
                 return next();
             }
         )(req,res,next);
