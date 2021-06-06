@@ -6,30 +6,29 @@ module.exports= {
     async listarUsuarios(req,res){
         try{
             const usuarios = await database.Usuario.findAll()
-            return res.status(200).json(usuariosNome(usuarios))
+            return res.status(200).json(trataUsuarios(usuarios))
         }catch(error){
-            return res.status(400).json({erro:error.message})
+            return res.status(400).json({erro:"Desculpe, mas nao foi possivel listar os usuarios!"})
         }
     },
     async listarUsuario(req,res){
         try{
             const usuario = await database.Usuario.findByPk(req.params.id)
-            return res.status(200).json(usuariosNome(usuarios))
+            return res.status(200).json(usuariosNome(usuario))
         }catch(error){
-            return res.status(400).json({erro:error.message})
+            return res.status(400).json({erro:"Desculpe, mas nao foi possivel listar o usuario desejado!"})
         }
     },
     async inserirUsuario(req,res){
         try{
             if(req.is('json')){
                 const usuario = await database.Usuario.create(req.body)
-            return res.status(201).json({id:usuario.id,nome: usuario.nome, cpf: usuario.cpf})
+            return res.status(201).json({id:usuario.id, nome:usuario.nome, cpf:usuario.cpf})
             }else{
                 throw new Error ("Desculpe, mas nao foi possivel inserir um novo usuario!")
             } 
         }catch(error){
-            console.log(error.message)
-            return res.status(400).json({erro:error.message})
+            return res.status(400).json({erro:"Desculpe, mas nao foi possivel inserir um novo usuario!"})
         }
     },
     async atualizarUsuario(req,res){
@@ -37,32 +36,31 @@ module.exports= {
             if(req.is('json')){
                 const usuario = await database.Usuario.findByPk(req.params.id)
                 await usuario.update(req.body)
-                res.status(200).json({id: usuario.id, nome: usuario.nome, cpf: usuario.cpf})
+                res.status(200).json({id:usuario.id, nome:usuario.nome, cpf:usuario.cpf})
             }else{
-                throw new Error("Desculpe, mas nao foi possivel inserir um novo usuario!")
+                throw new Error("Desculpe, mas nao foi possivel atualizar o usuario desejado!")
             }
         }catch(error){
-            return res.status(400).json({erro:"Desculpe, mas nao foi possivel atualizar um novo usuario!"})
+            return res.status(400).json({erro:"Desculpe, mas nao foi possivel atualizar o usuario desejado!"})
         }
 
     },
-
     async deletarUsuario(req,res){
         try{
             const usuario = await database.Usuario.findByPk(req.params.id)
             await usuario.destroy(req.body)
-            return res.status(200).send()
+            return res.status(200).json({msg:"Usuario deletado com sucesso!"})
         }catch(error){
-            return res.status(400).json({erro:"Desculpe, mas nao foi possivel deletar um novo usuario!"})
+            return res.status(400).json({erro:"Desculpe, mas nao foi possivel deletar o usuario desejado!"})
         }
 
     }
 
 }
 
-function usuariosNome(arr){
+function trataUsuarios(arr){
     let usuario = [];
-    for(i=0;i<arr.length;i++){
+    for(i = 0 ; i < arr.length ; i++){
         usuario.push({nome: arr[i].nome, cpf: arr[i].cpf})
     }
     return usuario

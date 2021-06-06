@@ -4,10 +4,9 @@ module.exports = {
     async listarItensUsuario(req,res){
         try{
             const itensUsu = await database.item_usuario.findAll()
-            //console.log()
-            return res.status(200).json(itemUsuarioNome(itensUsu))
+            return res.status(200).json(trataItensUsuario(itensUsu))
         }catch(error){
-            return res.status(400).json({erro:error.message})
+            return res.status(400).json({erro:"Desculpe, mas nao foi possivel listar os itens usuarios!"})
         }
     },
     async listarItemUsuario(req,res){
@@ -15,7 +14,7 @@ module.exports = {
             const itemUsu = await database.item_usuario.findByPk(req.params.id)
             return res.status(200).json(trataItemUsuario(itemUsu))
         }catch(error){
-            return res.status(400).json({erro:error.message})
+            return res.status(400).json({erro:"Desculpe, mas nao foi possivel listar os item usuario!"})
         }
     },
     async inserirItemUsuario(req,res){
@@ -24,10 +23,10 @@ module.exports = {
                 const itemUsu = await database.item_usuario.create(req.body)
             return res.status(201).json(trataItemUsuario(itemUsu))
             }else{
-                throw new Error ("Desculpe, mas nao foi possivel inserir!")
+                throw new Error ("Desculpe, mas nao foi possivel inserir o item usuario desejado!")
             } 
         }catch(error){
-            return res.status(400).json({erro:error.message})
+            return res.status(400).json({erro:"Desculpe, mas nao foi possivel inserir o item usuario desejado!"})
         }
     },
     async atualizarItemUsuario(req,res){
@@ -37,32 +36,33 @@ module.exports = {
                 await itemUsu.update(req.body)
                 res.status(200).json(trataItemUsuario(itemUsu))
             }else{
-                throw new Error("Desculpe, mas nao foi possivel inserir!")
+                throw new Error("Desculpe, mas nao foi possivel atualizar o item usuario desejado!")
             }
         }catch(error){
-            return res.status(400).json({erro:"Desculpe, mas nao foi possivel atualizar!"})
+            return res.status(400).json({erro:"Desculpe, mas nao foi possivel atualizar o item usuario desejado!"})
         }
 
     },
-
     async deletarItemUsuario(req,res){
         try{
             const itemUsu = await database.item_usuario.findByPk(req.params.id)
             await itemUsu.destroy(req.body)
-            return res.status(200).send("Item Usuario Deletado")
+            return res.status(200).json({msg:"Item usuario deletado com sucesso"})
         }catch(error){
-            return res.status(400).json({erro:"Desculpe, mas nao foi possivel deletar!"})
+            return res.status(400).json({erro:"Desculpe, mas nao foi possivel deletar o item usuario desejado!"})
         }
 
     }
 }
 
-function itemUsuarioNome(arr){
-    let usuario = [];
-    for(i=0;i<arr.length;i++){
-        usuario.push({item_id: arr[i].item_id, usuario_id: arr[i].usuario_id})
+function trataItensUsuario(arr){
+    let itensUsuario = [];
+    for(i = 0 ; i < arr.length ; i++){
+        itensUsuario.push({id:arr[i].id,item_id:arr[i].item_id, usuario_id:arr[i].usuario_id})
     }
-    return usuario
+    return itensUsuario
 }
 
-function trataItemUsuario(itemUsu){ return {item_id:itemUsu.item_id,usuario_id:itemUsu.usuario_id}}
+function trataItemUsuario(itemUsu){ 
+    return {id:itemUsu.id, item_id:itemUsu.item_id, usuario_id:itemUsu.usuario_id}
+}

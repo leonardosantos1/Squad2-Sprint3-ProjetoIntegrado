@@ -10,10 +10,12 @@ module.exports = {
       },
       data_reserva: {
         type: Sequelize.DATE,
+        allowNull:false,
         unique:true
       },
       checkout: {
         type: Sequelize.DATE,
+        allowNull:false,
         unique:true
       },
       item_usuario_id:{
