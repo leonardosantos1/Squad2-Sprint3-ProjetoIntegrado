@@ -21,13 +21,13 @@ module.exports = (sequelize, DataTypes) => {
   };
   item_usuario.init({
     item_id:{
-      type:DataTypes.STRING,
+      type:DataTypes.INTEGER,
       validate:{
         isNumeric: true,
       }
     },
     usuario_id:{
-      type:DataTypes.STRING,
+      type:DataTypes.INTEGER,
       validate:{
         isNumeric: true,
       }

@@ -26,7 +26,7 @@ module.exports = {
                 throw new Error("Desculpe, mas nao foi possivel criar um novo usuario!")
             }
         }catch(error){
-            return res.status(400).json({erro:"Desculpe, mas nao foi possivel criar um novo usuario!"})
+            return res.status(400).json({erro:error.message})
         }
     },
     async atualizarLogin(req,res){
