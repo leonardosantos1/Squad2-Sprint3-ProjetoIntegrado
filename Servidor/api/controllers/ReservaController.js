@@ -4,7 +4,7 @@ module.exports = {
     async listarReservas(req,res){
         try{
             const reservas = await database.Reserva.findAll()
-            return res.status(200).json(trataReservas(reservas))
+            return res.status(200).json(reservas)
         }catch(error){
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel listar as reservas desejada!"})
         }

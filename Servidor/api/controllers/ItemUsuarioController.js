@@ -4,8 +4,9 @@ module.exports = {
     async listarItensUsuario(req,res){
         try{
             const itensUsu = await database.item_usuario.findAll()
-            return res.status(200).json(trataItensUsuario(itensUsu))
+            return res.status(200).json(itensUsu)
         }catch(error){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel listar os itens usuarios!"})
         }
     },
