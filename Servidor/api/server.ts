@@ -1,13 +1,16 @@
 require('dotenv').config()
 const middlewaresAutenticacao = require('./estrategiaLogin/middlewares-autenticacao')
+
 import express from 'express'
-const db = require('./models')
 const app  = express()
 
+const db = require('./models')
+
 import rotaUsuario from './routes/usuarioRota'
-const rotaLogin =  require('./routes/loginRota')
-const rotaTipo =  require('./routes/tipoRota')
-const rotaItem =  require('./routes/itemRota')
+import rotaLogin from './routes/loginRota'
+import rotaTipo from './routes/tipoRota'
+import rotaItem from './routes/itemRota'
+
 const rotaItemUsuario =  require('./routes/itemUsuarioRota')
 const rotaReserva =  require('./routes/reservaRota')
 
@@ -23,5 +26,5 @@ app.use('/itemUsuario',rotaItemUsuario)
 app.use('/reserva',rotaReserva)
 
 db.sequelize.sync().then(()=>{
-    app.listen(3000,()=>console.log("funfou!!"))
+    app.listen(3000,()=>console.log("APP ESCUTANDO NA PORTA 3000"))
 })

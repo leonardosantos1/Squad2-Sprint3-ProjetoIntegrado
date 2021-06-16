@@ -50,7 +50,7 @@ class UsuarioController{
     async deletarUsuario(req:Request,res:Response){
         try{
             const usuario = await database.Usuario.findByPk(req.params.id)
-            await usuario.destroy(req.body)
+            await usuario.destroy()
             return res.status(200).json({msg:"Usuario deletado com sucesso!"})
         }catch(error){
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel deletar o usuario desejado!"})
