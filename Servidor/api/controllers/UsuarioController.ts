@@ -8,7 +8,7 @@ class UsuarioController{
         try{
             const usuarios = await database.Usuario.findAll()
             return res.status(200).json(usuarios)
-        }catch(error){
+        }catch(error: any){
             console.log(error)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel listar os usuarios!"})
         }
@@ -17,7 +17,8 @@ class UsuarioController{
         try{
             const usuario = await database.Usuario.findByPk(req.params.id)
             return res.status(200).json({id:usuario.id, nome:usuario.nome, cpf:usuario.cpf})
-        }catch(error){
+        }catch(error: any){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel listar o usuario desejado!"})
         }
     }
@@ -29,7 +30,8 @@ class UsuarioController{
             }else{
                 throw new Error ("Desculpe, mas nao foi possivel inserir um novo usuario!")
             } 
-        }catch(error){
+        }catch(error: any){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel inserir um novo usuario!"})
         }
     }
@@ -42,7 +44,8 @@ class UsuarioController{
             }else{
                 throw new Error("Desculpe, mas nao foi possivel atualizar o usuario desejado!")
             }
-        }catch(error){
+        }catch(error: any){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel atualizar o usuario desejado!"})
         }
 
@@ -52,7 +55,8 @@ class UsuarioController{
             const usuario = await database.Usuario.findByPk(req.params.id)
             await usuario.destroy()
             return res.status(200).json({msg:"Usuario deletado com sucesso!"})
-        }catch(error){
+        }catch(error: any){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel deletar o usuario desejado!"})
         }
     }
