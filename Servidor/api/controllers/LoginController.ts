@@ -8,7 +8,8 @@ class LoginController{
         try{
             const login = await database.Login.findAll()
             return res.status(200).json(login)
-        }catch(error){
+        }catch(error: any){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpa, mas nao foi possivel listar os usuarios!"})
         }
     }
@@ -26,21 +27,22 @@ class LoginController{
             }else{
                 throw new Error("Desculpe, mas nao foi possivel criar um novo usuario!")
             }
-        }catch(error){
+        }catch(error: any){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel criar um novo usuario!"})
         }
     }
     async atualizarLogin(req:Request,res:Response){
         try{
             if(req.is('json')){
-
                 const login = await database.Login.findByPk(req.params.id)
                 await login.update(req.body)
                 res.status(200).json({"usuario_id":login.usuario_id, "senha":login.senha})
             }else{
                 return res.status(400).json({erro:"Desculpe, mas nao foi possivel atualizar!"})
             }
-        }catch(error){
+        }catch(error: any){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel atualizar o login!"})
         }
     }

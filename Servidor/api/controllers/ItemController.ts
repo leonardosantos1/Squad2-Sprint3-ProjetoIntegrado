@@ -7,7 +7,8 @@ class ItemController {
         try{
             const itens = await database.Item.findAll()
             return res.status(200).json(itens)
-        }catch(error){
+        }catch(error: any){
+            console.log(error.message)
             return res.status(400).json({erro:'Desculpe mas não foi possivel listar os itens!'})
         }
     }
@@ -15,7 +16,8 @@ class ItemController {
         try{
             const item = await database.Item.findByPk(req.params.id)
             return res.status(200).json(item)
-        }catch(error){
+        }catch(error: any){
+            console.log(error.message)
             return res.status(400).json({erro:'Desculpe mas não foi possivel buscar o item!'})
         }
     }
@@ -27,7 +29,8 @@ class ItemController {
             }else{
                 throw new Error ("Desculpe mas nao foi possivel inserir um novo item!")
             } 
-        }catch(error){
+        }catch(error: any){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe mas nao foi possivel inserir um novo item!"})
         }
     }
@@ -40,7 +43,8 @@ class ItemController {
             }else{
                 throw new Error("Desculpe mas nao foi possivel atualizar o item desejado!")
             }
-        }catch(error){
+        }catch(error: any){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe mas nao foi possivel atualizar o item desejado!"})
         }
 
@@ -50,7 +54,8 @@ class ItemController {
             const item = await database.Item.findByPk(req.params.id)
             await item.destroy(req.body)
             return res.status(200).json({msg:"Item deletado com sucesso!"})
-        }catch(error){
+        }catch(error: any){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe mas nao foi possivel deletar o item desejado!"})
         }
 
