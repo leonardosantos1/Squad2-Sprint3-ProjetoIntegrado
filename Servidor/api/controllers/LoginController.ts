@@ -32,6 +32,20 @@ class LoginController{
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel criar um novo usuario!"})
         }
     }
+    async criarLoginadm(req:Request,res:Response){
+        try{
+            if(req.is('json')){
+                req.body.senha = await senhaHash.adiconaSenhaadm(req)
+                const login = await database.Login.create(req.body)
+                return res.status(201).json({"Login":login.id, "Cargo":"Administrador"}) 
+            }else{
+                throw new Error("Desculpe, mas nao foi possivel criar um novo usuario!")
+            }
+        }catch(error: any){
+            console.log(error.message)
+            return res.status(400).json({erro:"Desculpe, mas nao foi possivel criar um novo usuario!"})
+        }
+    }
     async atualizarLogin(req:Request,res:Response){
         try{
             if(req.is('json')){
