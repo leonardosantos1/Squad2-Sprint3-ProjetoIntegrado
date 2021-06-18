@@ -58,7 +58,7 @@ RESERVA:
 
 Requisicoes:
  -cadastro administrador: post- usuario/ {"nome":"xxxxxx", "cpf":"xxxxxxxxxxx"} login/:admin {"usuario_id":"x","senha":"xxxx"}
-   obs: Admin tem acesso a rotas privadas
+   obs: Somente admin ira add Admin
  -Cadastro usuario: {"nome":"xxxxxx", "cpf":"xxxxxxxxxxx", "senha":"xxx"}
    obs: Senha opicional, caso queira criar ja o login junto ao usuario enviar a senha junto.
  -Login: {"cpf": "xxxxxxxxxxx", "senha":"xxx"}
