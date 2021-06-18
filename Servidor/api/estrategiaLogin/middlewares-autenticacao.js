@@ -24,7 +24,7 @@ module.exports = {
     bearer: (req, res, next) => {
         passport.authenticate(
             'bearer', { session: false },
-            (erro, usuario, info) => {
+            async(erro, usuario, info) => {
                 if (erro && erro.name === 'JsonWebTokenError') {
                     return res.status(401).json({ erro: "Desculpe, mas ocorreu um erro com o seu token!" })
                 }
@@ -35,6 +35,14 @@ module.exports = {
                     return res.status(401).json()
                 }
                 req.user = usuario;
+                const dadosUsuario = await database.Usuario.findByPk(usuario.usuario_id)
+                req.user.nome = dadosUsuario.nome
+                if (usuario.senha.indexOf("$14") === 3) {
+                    req.user.Admin = true
+                    console.log("ADMIN" + " Nome: " + dadosUsuario.nome)
+                } else {
+                    req.user.Admin = false
+                }
                 return next();
             }
         )(req, res, next);
@@ -55,13 +63,12 @@ module.exports = {
                 req.user = usuario;
                 const dadosUsuario = await database.Usuario.findByPk(usuario.usuario_id)
                     //console.log(dadosUsuario)
-
                 if (usuario.senha.indexOf("$14") === 3) {
+                    req.user.Admin = true
                     console.log("ADMIN" + " Nome: " + dadosUsuario.nome)
                 } else {
                     return res.status(500).json({ erro: "Voce nao administrador!" })
                 }
-
                 return next();
             }
         )(req, res, next);

@@ -14,6 +14,7 @@ class UsuarioController{
         }
     }
     async listarUsuario(req:Request,res:Response){
+        console.log(req)
         try{
             const usuario = await database.Usuario.findByPk(req.params.id)
             return res.status(200).json({id:usuario.id, nome:usuario.nome, cpf:usuario.cpf})
