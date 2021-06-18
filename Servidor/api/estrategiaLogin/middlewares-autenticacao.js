@@ -25,7 +25,6 @@ module.exports = {
                     return res.status(401).json()
                 }
                 req.user = usuario
-                console.log(req.user.id)
                 return next()
             }
         )(req, res, next);
@@ -76,7 +75,7 @@ module.exports = {
                     req.user.Admin = true
                     console.log("ADMIN" + " Nome: " + dadosUsuario.nome)
                 } else {
-                    return res.status(500).json({ erro: "Voce nao administrador!" })
+                    return res.status(403).json({ erro: "Voce nao administrador!" })
                 }
                 return next();
             }

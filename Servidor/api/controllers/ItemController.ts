@@ -25,7 +25,7 @@ class ItemController {
         try{
             if(req.is('json')){
                 const item = await database.Item.create(req.body)
-            return res.status(201).json(item)
+                return res.status(201).json(item)
             }else{
                 throw new Error ("Desculpe mas nao foi possivel inserir um novo item!")
             } 
