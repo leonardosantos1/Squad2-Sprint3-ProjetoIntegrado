@@ -6,6 +6,7 @@ module.exports = {
             const reservas = await database.Reserva.findAll()
             return res.status(200).json(reservas)
         }catch(error){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel listar as reservas desejada!"})
         }
     },
@@ -14,6 +15,7 @@ module.exports = {
             const reserva = await database.Reserva.findByPk(req.params.id)
             return res.status(200).json(trataReserva(reserva))
         }catch(error){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel listar a reserva desejada!"})
         }
     },
@@ -26,6 +28,7 @@ module.exports = {
                 throw new Error ("Desculpe, mas nao foi possivel inserir um novo usuario!")
             } 
         }catch(error){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel inserir um novo usuario!"})
         }
     },
@@ -39,6 +42,7 @@ module.exports = {
                 throw new Error("Desculpe, mas nao foi possivel atualizar um novo usuario!")
             }
         }catch(error){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel atualizar um novo usuario!"})
         }
 
@@ -49,6 +53,7 @@ module.exports = {
             await reserva.destroy(req.body)
             return res.status(200).json({msg:"Reserva deletada com sucesso!"})
         }catch(error){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel deletar o usuario desejado!"})
         }
 

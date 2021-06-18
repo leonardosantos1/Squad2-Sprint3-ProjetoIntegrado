@@ -15,6 +15,7 @@ module.exports = {
             const itemUsu = await database.item_usuario.findByPk(req.params.id)
             return res.status(200).json(trataItemUsuario(itemUsu))
         }catch(error){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel listar os item usuario!"})
         }
     },
@@ -27,6 +28,7 @@ module.exports = {
                 throw new Error ("Desculpe, mas nao foi possivel inserir o item usuario desejado!")
             } 
         }catch(error){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel inserir o item usuario desejado!"})
         }
     },
@@ -40,6 +42,7 @@ module.exports = {
                 throw new Error("Desculpe, mas nao foi possivel atualizar o item usuario desejado!")
             }
         }catch(error){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel atualizar o item usuario desejado!"})
         }
 
@@ -50,6 +53,7 @@ module.exports = {
             await itemUsu.destroy(req.body)
             return res.status(200).json({msg:"Item usuario deletado com sucesso"})
         }catch(error){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel deletar o item usuario desejado!"})
         }
 

@@ -6,7 +6,8 @@ class TipoController {
         try{
             const tipos = await database.Tipo.findAll()
             return res.status(200).json(tipos)
-        }catch(error){
+        }catch(error: any){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel listar os tipos!"})
         }
     }
@@ -14,7 +15,8 @@ class TipoController {
         try{
             const tipo = await database.Tipo.findByPk(req.params.id)
             return res.status(200).json(tipo)
-        }catch(error){
+        }catch(error: any){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel listar o tipo desejado!"})
         }
     }
@@ -26,7 +28,8 @@ class TipoController {
             }else{
                 throw new Error ("Desculpe, mas nao foi possivel inserir um novo tipo!")
             } 
-        }catch(error){
+        }catch(error: any){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel inserir um novo tipo!"})
         }
     }
@@ -39,17 +42,20 @@ class TipoController {
             }else{
                 throw new Error("Desculpe, mas nao foi possivel atualizar o tipo desejado!")
             }
-        }catch(error){
+        }catch(error: any){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel atualizar o tipo desejado!"})
         }
 
     }
+
     async deletarTipo(req:Request,res:Response){
         try{
             const tipo = await database.Tipo.findByPk(req.params.id)
             await tipo.destroy(req.body)
             return res.status(200).json({msg:"Tipo deletado com sucesso!"})
-        }catch(error){
+        }catch(error: any){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel deletar!"})
         }
 
