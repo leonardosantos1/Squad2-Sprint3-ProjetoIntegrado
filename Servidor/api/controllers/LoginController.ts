@@ -23,7 +23,7 @@ class LoginController{
             if(req.is('json')){
                 req.body.senha = await senhaHash.adiconaSenha(req)
                 const login = await database.Login.create(req.body)
-                return res.status(201).json({"id":login.id, "senha":login.senha}) 
+                return res.status(201).json({"Login":login.id}) 
             }else{
                 throw new Error("Desculpe, mas nao foi possivel criar um novo usuario!")
             }
