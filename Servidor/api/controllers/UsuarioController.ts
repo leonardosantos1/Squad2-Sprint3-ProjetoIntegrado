@@ -1,5 +1,6 @@
 const database = require('../models')
 import {Request,Response} from 'express'
+import senhaHash from '../estrategiaLogin/senhaHashController'
 
 
 class UsuarioController{
@@ -26,8 +27,16 @@ class UsuarioController{
     async inserirUsuario(req:Request,res:Response){
         try{
             if(req.is('json')){
-                const usuario = await database.Usuario.create(req.body)
-            return res.status(201).json({id:usuario.id, nome:usuario.nome, cpf:usuario.cpf})
+                if(req.body.senha){
+                        const usuario = await database.Usuario.create({nome: req.body.nome, cpf: req.body.cpf})
+                        const senha = req.body.senha
+                        const senhaCripto = await senhaHash.adiconaSenha(req)
+                        const login = await database.Login.create({usuario_id: usuario.id, senha: senhaCripto})
+                        return res.status(201).json({"Login":usuario.cpf}) 
+                }else{
+                    const usuario = await database.Usuario.create(req.body)
+                    return res.status(201).json({id:usuario.id, nome:usuario.nome, cpf:usuario.cpf})  
+                }
             }else{
                 throw new Error ("Desculpe, mas nao foi possivel inserir um novo usuario!")
             } 

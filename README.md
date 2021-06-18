@@ -56,4 +56,10 @@ RESERVA:
     data_reserva(date), checkout(date), item_usuario_id(integer)    
 
 
-
+Requisicoes:
+ -cadastro administrador: post- usuario/ {"nome":"xxxxxx", "cpf":"xxxxxxxxxxx"} login/:admin {"usuario_id":"x","senha":"xxxx"}
+   obs: Admin tem acesso a rotas privadas
+ -Cadastro usuario: {"nome":"xxxxxx", "cpf":"xxxxxxxxxxx", "senha":"xxx"}
+   obs: Senha opicional, caso queira criar ja o login junto ao usuario enviar a senha junto.
+ -Login: {"cpf": "xxxxxxxxxxx", "senha":"xxx"}
+  obs: Pode ser utilizado cpf ou id
