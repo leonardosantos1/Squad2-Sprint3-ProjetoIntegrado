@@ -1,0 +1,7 @@
+FROM node:12-alpine
+COPY . /api-node
+WORKDIR /api-node
+ENV CHAVE_JWT=JUVY7+WMKJny+EnyH7/wpEn475+GwT/D8ogD3HGGXgHKiIMKikqcMRUPzLc+FxBK0sE/BfeNUPgv3znwgR1GzITkCcv93YEcDcj+bGVFbH4DUSxybXtoFRTnIrTmRDJ7iNe+RHYtdr6r1a2CMQoYEr2lqc3MK2mKsIOaKrxLY2HSBlI2SkWabqsL0fwwu74FcHFkRnWa/GbtrA3zUg9uhs9v5GmknXzEOv4SnsPippvuxRWW7/qcRm2FIgV423xTQk1MHrCEc/SYYzcfcR8e0ULhUTQy9utQZvaGSpdqA4g+z7eQO1MPqqII/RhDHmOeTzPf0dezM8DtXGWj3qH/7A==
+RUN npm install 
+EXPOSE 3000
+CMD npm run dev

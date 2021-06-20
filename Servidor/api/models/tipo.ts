@@ -19,7 +19,7 @@ module.exports = (sequelize:any, DataTypes:any) => {
      categoria!:string
     static associate(models:any) {
       Tipo.hasMany(models.Item,{
-        foreignKey:'tipo_id',
+        foreignKey:'tipoId',
         onDelete:'CASCADE'
       })
 

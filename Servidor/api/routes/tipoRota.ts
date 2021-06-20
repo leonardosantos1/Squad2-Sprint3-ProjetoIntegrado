@@ -5,9 +5,9 @@ const middlewaresAutenticacao = require('../estrategiaLogin/middlewares-autentic
 
 router.get("/",tipoController.listarTipos)
 router.get("/:id",tipoController.listarTipo)
-router.post('/',middlewaresAutenticacao.bearer,tipoController.inserirTipo)
-router.put('/:id',middlewaresAutenticacao.bearer,tipoController.atualizarTipo)
-router.delete("/:id",middlewaresAutenticacao.bearer,tipoController.deletarTipo)
+router.post('/',middlewaresAutenticacao.bearerAdm,tipoController.inserirTipo)
+router.put('/:id',middlewaresAutenticacao.bearerAdm,tipoController.atualizarTipo)
+router.delete("/:id",middlewaresAutenticacao.bearerAdm,tipoController.deletarTipo)
 
 
 export default router

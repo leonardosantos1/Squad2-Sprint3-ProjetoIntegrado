@@ -2,8 +2,6 @@
 Projeto integrado da squade 2 na sprint 3
 
 Utilizamos o database chamado "controle"
-O comando para conseguir rodar todas as migrations use o "npx sequelize-cli db:migrate"
-O comando para conseguir deletar todas as migrations use o "npx sequelize-cli db:migrate:undo:all"
 
 Criar arquivo .env, e colocar a criar CHAVE_JWT
 Gerar chave alheatoria JWT:
@@ -56,4 +54,10 @@ RESERVA:
     data_reserva(date), checkout(date), item_usuario_id(integer)    
 
 
-
+Requisicoes:
+ -Cadastro usuario: {"nome":"xxxxxx", "cpf":"xxxxxxxxxxx", "senha":"xxx"}
+   obs: Senha opicional, caso queira criar ja o login junto ao usuario enviar a senha junto.
+ -Login: {"cpf": "xxxxxxxxxxx", "senha":"xxx"}
+  obs: Pode ser utilizado cpf ou id
+ -cadastro administrador: Subir cargo um usuario - login/:admin {"cpf":"x","senha":"xxxx"} //senha mais forte e sem acesso ao banco evitando assim possiveis brechas
+   obs: Somente admin ira add Admin

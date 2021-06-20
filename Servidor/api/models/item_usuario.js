@@ -6,27 +6,27 @@ module.exports = (sequelize, DataTypes) => {
   class item_usuario extends Model {
     static associate(models) {
       item_usuario.belongsTo(models.Item,{
-        foreignKey:'item_id',
+        foreignKey:'itemId',
         onDelete:'CASCADE'
       })
       item_usuario.belongsTo(models.Usuario,{
-        foreignKey:'usuario_id',
+        foreignKey:'usuarioId',
         onDelete:'CASCADE'
       })
       item_usuario.hasMany(models.Reserva,{
-        foreignKey:'item_usuario_id',
+        foreignKey:'itemUsuarioId',
         onDelete:'CASCADE'
       })
     }
   };
   item_usuario.init({
-    item_id:{
+    itemId:{
       type:DataTypes.INTEGER,
       validate:{
         isNumeric: true,
       }
     },
-    usuario_id:{
+    usuarioId:{
       type:DataTypes.INTEGER,
       validate:{
         isNumeric: true,

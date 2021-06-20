@@ -6,7 +6,7 @@ import {
 interface ItemAttributes{
   id:number
   numeracao:number
-  tipo_id:number
+  tipoId:number
 }
 
 module.exports = (sequelize:any, DataTypes:any) => {
@@ -14,14 +14,14 @@ module.exports = (sequelize:any, DataTypes:any) => {
 
     id!:number
     numeracao!:number
-    tipo_id!:number
+    tipoId!:number
     static associate(models:any) {
      Item.hasOne(models.item_usuario,{
-        foreignKey:'item_id',
+        foreignKey:'itemId',
         onDelete: 'CASCADE'
       })
       Item.belongsTo(models.Tipo,{
-        foreignKey:'tipo_id',
+        foreignKey:'tipoId',
         onDelete:'CASCADE'
       })
     }
@@ -40,7 +40,7 @@ module.exports = (sequelize:any, DataTypes:any) => {
         isNumeric: true
       }
     },
-    tipo_id:{
+    tipoId:{
       type: DataTypes.INTEGER,
         allowNull:false,
         references:{model:'Tipos', key:'id'},
