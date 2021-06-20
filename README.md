@@ -2,8 +2,6 @@
 Projeto integrado da squade 2 na sprint 3
 
 Utilizamos o database chamado "controle"
-O comando para conseguir rodar todas as migrations use o "npx sequelize-cli db:migrate"
-O comando para conseguir deletar todas as migrations use o "npx sequelize-cli db:migrate:undo:all"
 
 Criar arquivo .env, e colocar a criar CHAVE_JWT
 Gerar chave alheatoria JWT:

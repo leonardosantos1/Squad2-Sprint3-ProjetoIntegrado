@@ -6,7 +6,7 @@ import {
 interface LoginAttributes{
   id:number
   senha:string
-  usuario_id:number
+  usuarioId:number
 }
 
 module.exports = (sequelize:any, DataTypes:any) => {
@@ -18,10 +18,10 @@ module.exports = (sequelize:any, DataTypes:any) => {
      */
     id!:number
     senha!:string
-    usuario_id!:number
+    usuarioId!:number
     static associate(models:any) {
       Login.belongsTo(models.Usuario,{
-        foreignKey:'usuario_id',
+        foreignKey:'usuarioId',
         onDelete:'CASCADE'
       })
     }
@@ -37,7 +37,7 @@ module.exports = (sequelize:any, DataTypes:any) => {
       allowNull: false,
       type: DataTypes.STRING(600),
     },
-    usuario_id:{
+    usuarioId:{
       type:DataTypes.INTEGER,
       unique:true,
       allowNull:false,

@@ -1,10 +1,8 @@
-const database = require('../models')
+import database from '../models'
 import {Request,Response} from 'express'
 import senhaHash from '../estrategiaLogin/senhaHashController'
 
 //import trataUsuarios from '../tratamentoControllers/UsuarioController'
-
-
 
 class UsuarioController{
 
@@ -32,9 +30,8 @@ class UsuarioController{
             if(req.is('json')){
                 if(req.body.senha){
                         const usuario = await database.Usuario.create({nome: req.body.nome, cpf: req.body.cpf})
-                        const senha = req.body.senha
-                        const senhaCripto = await senhaHash.adiconaSenha(req)
-                        const login = await database.Login.create({usuario_id: usuario.id, senha: senhaCripto})
+                        const senhaCripto = await senhaHash.adicionaSenha(req)
+                        await database.Login.create({usuarioId: usuario.id, senha: senhaCripto})
                         return res.status(201).json({"Login":usuario.cpf}) 
                 }else{
                     const usuario = await database.Usuario.create(req.body)

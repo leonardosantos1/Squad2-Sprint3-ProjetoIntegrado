@@ -6,7 +6,7 @@ router.get("/",itemUsuarioController.listarItensUsuario)
 router.get("/:id",itemUsuarioController.listarItemUsuario)
 router.post('/',middlewaresAutenticacao.bearer,itemUsuarioController.inserirItemUsuario)
 router.put('/:id',middlewaresAutenticacao.bearer,itemUsuarioController.atualizarItemUsuario)
-router.delete("/:id",middlewaresAutenticacao.bearer,itemUsuarioController.deletarItemUsuario)
+router.delete("/:id",middlewaresAutenticacao.bearerAdm,itemUsuarioController.deletarItemUsuario)
 
 
 module.exports = router
