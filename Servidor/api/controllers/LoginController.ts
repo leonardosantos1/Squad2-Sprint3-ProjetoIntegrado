@@ -1,4 +1,4 @@
-const database =  require('../models')
+import database from '../models'
 const senhaHash = require('../estrategiaLogin/senhaHashController')
 const jwt = require('jsonwebtoken')
 import {Request,Response} from 'express'
@@ -39,15 +39,15 @@ class LoginController{
                     const usurioadm = await database.Usuario.findOne({ where: { cpf: req.body.cpf } })
                     if(usurioadm){
                         req.body.senha = await senhaHash.adiconaSenhaadm(req)
-                        await database.Login.update({ senha: req.body.senha }, {where: {usuario_id: usurioadm.id}});
+                        await database.Login.update({ senha: req.body.senha }, {where: {usuarioId: usurioadm.id}});
                         return res.status(201).json({"Cargo_atribuido":"Administrador"})
                     } 
                 }
-                if(req.body.usuario_id && req.body.senha){
-                    const usurioadm = await database.Usuario.findByPk(req.body.usuario_id)
+                if(req.body.usuarioId && req.body.senha){
+                    const usurioadm = await database.Usuario.findByPk(req.body.usuarioId)
                     if(usurioadm){
                         req.body.senha = await senhaHash.adiconaSenhaadm(req)
-                        await database.Login.update({ senha: req.body.senha }, {where: {usuario_id: req.body.usuario_id}});
+                        await database.Login.update({ senha: req.body.senha }, {where: {usuarioId: req.body.usuarioId}});
                         return res.status(201).json({"Cargo_atribuido":"Administrador"})
                     }   
             }else{
@@ -69,7 +69,7 @@ class LoginController{
             if(req.is('json')){
                 const login = await database.Login.findByPk(req.params.id)
                 await login.update(req.body)
-                res.status(200).json({"usuario_id":login.usuario_id, "senha":login.senha})
+                res.status(200).json({"usuarioId":login.usuarioId, "senha":login.senha})
             }else{
                 return res.status(400).json({erro:"Desculpe, mas nao foi possivel atualizar!"})
             }
@@ -80,7 +80,7 @@ class LoginController{
     }
 }
 
-function criaTokenJWT(login:{id:number, senha:string, usuario_id:number}){
+function criaTokenJWT(login:{id:number, senha:string, usuarioId:number}){
     const payload = {
         id: login.id
     }

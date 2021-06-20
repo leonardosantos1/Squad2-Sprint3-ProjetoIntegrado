@@ -1,11 +1,11 @@
 const passport = require('passport');
-const database = require('../models')
+import database from '../models'
 
 module.exports = {
     local: async(req, res, next) => {
         if (!req.body.id && req.body.cpf) {
             const dadosUsuario = await database.Usuario.findOne({ where: { cpf: req.body.cpf } })
-            const dadosLogin = await database.Login.findOne({ where: { usuario_id: dadosUsuario.id } })
+            const dadosLogin = await database.Login.findOne({ where: { usuarioId: dadosUsuario.id } })
             req.body.id = dadosLogin.id
         } else {
             if (!req.body.id) {
@@ -34,7 +34,7 @@ module.exports = {
             'bearer', { session: false },
             async(erro, usuario, info) => {
                 if (erro && erro.name === 'JsonWebTokenError') {
-                    return res.status(401).json({ erro: "Desculpe, mas ocorreu um erro com o seu token!" })
+                    return res.status(401).json()
                 }
                 if (erro) {
                     return res.status(500).json({ erro: "Desculpe, mas ocorreu um erro com o seu token!" })
@@ -43,7 +43,7 @@ module.exports = {
                     return res.status(401).json()
                 }
                 req.user = usuario;
-                const dadosUsuario = await database.Usuario.findByPk(usuario.usuario_id)
+                const dadosUsuario = await database.Usuario.findByPk(usuario.usuarioId)
                 req.user.nome = dadosUsuario.nome
                 if (usuario.senha.indexOf("$14") === 3) {
                     req.user.Admin = true
@@ -60,7 +60,7 @@ module.exports = {
             'bearer', { session: false },
             async(erro, usuario, info) => {
                 if (erro && erro.name === 'JsonWebTokenError') {
-                    return res.status(401).json({ erro: "Desculpe, mas ocorreu um erro com o seu token!" })
+                    return res.status(401).json()
                 }
                 if (erro) {
                     return res.status(500).json({ erro: "Desculpe, mas ocorreu um erro com o seu token!" })
@@ -69,7 +69,7 @@ module.exports = {
                     return res.status(401).json()
                 }
                 req.user = usuario;
-                const dadosUsuario = await database.Usuario.findByPk(usuario.usuario_id)
+                const dadosUsuario = await database.Usuario.findByPk(usuario.usuarioId)
                     //console.log(dadosUsuario)
                 if (usuario.senha.indexOf("$14") === 3) {
                     req.user.Admin = true

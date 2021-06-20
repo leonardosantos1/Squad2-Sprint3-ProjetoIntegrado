@@ -1,4 +1,4 @@
-const database =  require('../models')
+import database from '../models'
 import {Request,Response} from 'express'
 
 class TipoController {
