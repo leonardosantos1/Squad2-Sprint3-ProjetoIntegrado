@@ -57,9 +57,9 @@ RESERVA:
 
 
 Requisicoes:
- -cadastro administrador: post- usuario/ {"nome":"xxxxxx", "cpf":"xxxxxxxxxxx"} login/:admin {"usuario_id":"x","senha":"xxxx"}
-   obs: Somente admin ira add Admin
  -Cadastro usuario: {"nome":"xxxxxx", "cpf":"xxxxxxxxxxx", "senha":"xxx"}
    obs: Senha opicional, caso queira criar ja o login junto ao usuario enviar a senha junto.
  -Login: {"cpf": "xxxxxxxxxxx", "senha":"xxx"}
   obs: Pode ser utilizado cpf ou id
+ -cadastro administrador: Subir cargo um usuario - login/:admin {"cpf":"x","senha":"xxxx"} //senha mais forte e sem acesso ao banco evitando assim possiveis brechas
+   obs: Somente admin ira add Admin

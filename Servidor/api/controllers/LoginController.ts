@@ -35,9 +35,27 @@ class LoginController{
     async criarLoginadm(req:Request,res:Response){
         try{
             if(req.is('json')){
-                req.body.senha = await senhaHash.adiconaSenhaadm(req)
-                const login = await database.Login.create(req.body)
-                return res.status(201).json({"Login":login.id, "Cargo":"Administrador"}) 
+                if(req.body.cpf && req.body.senha){
+                    const usurioadm = await database.Usuario.findOne({ where: { cpf: req.body.cpf } })
+                    if(usurioadm){
+                        req.body.senha = await senhaHash.adiconaSenhaadm(req)
+                        await database.Login.update({ senha: req.body.senha }, {where: {usuario_id: usurioadm.id}});
+                        return res.status(201).json({"Cargo_atribuido":"Administrador"})
+                    } 
+                }
+                if(req.body.usuario_id && req.body.senha){
+                    const usurioadm = await database.Usuario.findByPk(req.body.usuario_id)
+                    if(usurioadm){
+                        req.body.senha = await senhaHash.adiconaSenhaadm(req)
+                        await database.Login.update({ senha: req.body.senha }, {where: {usuario_id: req.body.usuario_id}});
+                        return res.status(201).json({"Cargo_atribuido":"Administrador"})
+                    }   
+            }else{
+                        req.body.senha = await senhaHash.adiconaSenhaadm(req)
+                        const login = await database.Login.create(req.body)
+                        return res.status(201).json({"Login":login.id, "Cargo":"Administrador"})
+                    } 
+                
             }else{
                 throw new Error("Desculpe, mas nao foi possivel criar um novo usuario!")
             }

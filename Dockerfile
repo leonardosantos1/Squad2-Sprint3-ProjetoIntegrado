@@ -1,4 +1,4 @@
-FROM apache:latest
+FROM ubuntu
 
 MAINTAINER Vinicius Monteiro
 
