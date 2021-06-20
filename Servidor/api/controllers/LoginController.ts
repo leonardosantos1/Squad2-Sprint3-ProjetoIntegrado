@@ -7,7 +7,7 @@ class LoginController{
     async listar(req:Request,res:Response){
         try{
             const login = await database.Login.findAll()
-            return res.status(200).json(login)
+            return res.status(200).json(trataLogins(login))
         }catch(error: any){
             console.log(error.message)
             return res.status(400).json({erro:"Desculpa, mas nao foi possivel listar os usuarios!"})
@@ -70,11 +70,13 @@ function criaTokenJWT(login:{id:number, senha:string, usuario_id:number}){
     return token;
 }
 export default new LoginController()
-/*
-function trataLogins(arr){
+
+
+
+function trataLogins(arr:any){
     let login = [];
-    for(i = 0 ; i < arr.length ; i++){
-        login.push({id:arr[i].id, senha:arr[i].senha})
+    for(let i:any = 0 ; i < arr.length ; i++){
+        login.push({id:arr[i].id})
     }
     return login
-}*/
+}

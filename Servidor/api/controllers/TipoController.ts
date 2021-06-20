@@ -5,7 +5,7 @@ class TipoController {
     async listarTipos(req:Request,res:Response){
         try{
             const tipos = await database.Tipo.findAll()
-            return res.status(200).json(tipos)
+            return res.status(200).json(trataTipos(tipos))
         }catch(error: any){
             console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel listar os tipos!"})
@@ -14,7 +14,7 @@ class TipoController {
     async listarTipo(req:Request,res:Response){
         try{
             const tipo = await database.Tipo.findByPk(req.params.id)
-            return res.status(200).json(tipo)
+            return res.status(200).json({id:tipo.id, categoria:tipo.categoria})
         }catch(error: any){
             console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel listar o tipo desejado!"})
@@ -24,7 +24,7 @@ class TipoController {
         try{
             if(req.is('json')){
                 const tipo = await database.Tipo.create(req.body)
-            return res.status(201).json(tipo)
+            return res.status(201).json({id:tipo.id, categoria:tipo.categoria})
             }else{
                 throw new Error ("Desculpe, mas nao foi possivel inserir um novo tipo!")
             } 
@@ -38,7 +38,7 @@ class TipoController {
             if(req.is('json')){
                 const tipo = await database.Tipo.findByPk(req.params.id)
                 await tipo.update(req.body)
-                res.status(200).json(tipo)
+                res.status(200).json({id:tipo.id, categoria:tipo.categoria})
             }else{
                 throw new Error("Desculpe, mas nao foi possivel atualizar o tipo desejado!")
             }
@@ -63,14 +63,14 @@ class TipoController {
 }
 
 export default new TipoController()
-/*
-function trataTipos(arr){
+
+function trataTipos(arr:any){
     let tipo = [];
-    for(i = 0 ; i < arr.length ; i++){
+    for(let i:any = 0 ; i < arr.length ; i++){
         tipo.push({id:arr[i].id, categoria:arr[i].categoria})
     }
     return tipo
 }
-function tipo{ 
+/*function tipo{ 
     return {id:tipo.id, categoria:tipo.categoria}
 }*/
