@@ -1,10 +1,22 @@
 require('dotenv').config()
 const middlewaresAutenticacao = require('./estrategiaLogin/middlewares-autenticacao')
 
+import {Request, Response, NextFunction} from 'express'
+
+import camelCaseKeys from 'camelcase-keys'
+const camelCase = ()=>{
+    return function (req : Request, res : Response, next : NextFunction) {
+        req.body = camelCaseKeys(req.body, { deep: true })
+        req.params = camelCaseKeys(req.params)
+        req.query = camelCaseKeys(req.query)
+        next()
+      }
+}
+
 import express from 'express'
 const app  = express()
 
-const db = require('./models')
+import db from './models'
 
 import rotaUsuario from './routes/usuarioRota'
 import rotaLogin from './routes/loginRota'
@@ -17,6 +29,7 @@ const rotaReserva =  require('./routes/reservaRota')
 const {estrategiaAutenticacao} = require('./estrategiaLogin')
 
 app.use(express.json())
+app.use(camelCase())
 
 app.use('/usuario',rotaUsuario)
 app.use('/login',rotaLogin)
