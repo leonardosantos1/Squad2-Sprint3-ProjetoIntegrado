@@ -11,13 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Reserva.belongsTo(models.item_usuario,{
-        foreignKey:'item_usuario_id',
+        foreignKey:'itemUsuarioId',
         onDelete:'CASCADE'
       })
     }
   };
   Reserva.init({
-    data_reserva: DataTypes.DATE,
+    dataReserva: DataTypes.DATE,
     checkout: DataTypes.DATE
   }, {
     sequelize,

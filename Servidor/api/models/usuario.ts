@@ -18,11 +18,11 @@ module.exports = (sequelize:any, DataTypes:any) => {
     cpf!:string
     static associate(models:any) {
       Usuario.hasOne(models.item_usuario,{
-        foreignKey:'usuario_id',
+        foreignKey:'usuarioId',
         onDelete:'CASCADE'
       })
       Usuario.hasMany(models.Login,{
-        foreignKey:'usuario_id',
+        foreignKey:'usuarioId',
         onDelete:'CASCADE'
       })
 
