@@ -4,8 +4,6 @@ import senhaHash from '../estrategiaLogin/senhaHashController'
 
 //import trataUsuarios from '../tratamentoControllers/UsuarioController'
 
-
-
 class UsuarioController{
 
     async listarUsuarios(req:Request,res:Response){
@@ -32,9 +30,8 @@ class UsuarioController{
             if(req.is('json')){
                 if(req.body.senha){
                         const usuario = await database.Usuario.create({nome: req.body.nome, cpf: req.body.cpf})
-                        const senha = req.body.senha
-                        const senhaCripto = await senhaHash.adiconaSenha(req)
-                        const login = await database.Login.create({usuarioId: usuario.id, senha: senhaCripto})
+                        const senhaCripto = await senhaHash.adicionaSenha(req)
+                        await database.Login.create({usuarioId: usuario.id, senha: senhaCripto})
                         return res.status(201).json({"Login":usuario.cpf}) 
                 }else{
                     const usuario = await database.Usuario.create(req.body)

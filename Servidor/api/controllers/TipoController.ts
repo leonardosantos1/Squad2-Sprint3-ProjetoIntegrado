@@ -46,7 +46,6 @@ class TipoController {
             console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel atualizar o tipo desejado!"})
         }
-
     }
 
     async deletarTipo(req:Request,res:Response){
@@ -56,7 +55,7 @@ class TipoController {
             return res.status(200).json({msg:"Tipo deletado com sucesso!"})
         }catch(error: any){
             console.log(error.message)
-            return res.status(400).json({erro:"Desculpe, mas nao foi possivel deletar!"})
+            return res.status(400).json({erro:"Desculpe, mas nao foi possivel deletar o Tipo!"})
         }
 
     }

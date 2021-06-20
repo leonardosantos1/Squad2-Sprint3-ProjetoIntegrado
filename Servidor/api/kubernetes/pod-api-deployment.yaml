@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod-api-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: pod-api
+      labels:
+        app: pod-api
+    spec:
+      containers:
+        - name: pod-api-container
+          image: leonardosantos1/api-node   
+          ports:
+            - containerPort: 3000 
+  selector:
+    matchLabels:
+      app: pod-api
+              

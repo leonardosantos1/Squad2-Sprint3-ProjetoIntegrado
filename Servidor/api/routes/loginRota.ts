@@ -6,7 +6,7 @@ const middlewaresAutenticacao = require('../estrategiaLogin/middlewares-autentic
 router.get('/',loginController.listar)
 router.post('/entrar',middlewaresAutenticacao.local,loginController.login )
 router.post('/',loginController.criarLogin)
-router.post('/:admin'/*,middlewaresAutenticacao.beareradm*/,loginController.criarLoginadm)
+router.post('/admin'/*,middlewaresAutenticacao.beareradm*/,loginController.criarLoginAdm)
 router.put('/:id',middlewaresAutenticacao.bearer,loginController.atualizarLogin)
 
 export default router

@@ -16,7 +16,7 @@ module.exports = {
             return res.status(200).json({id:itemUsu.id, itemId:itemUsu.itemId, usuarioId:itemUsu.usuarioId})
         } catch (error) {
             console.log(error.message)
-            return res.status(400).json({ erro: "Desculpe, mas nao foi possivel listar os item usuario!" })
+            return res.status(400).json({ erro: "Desculpe, mas nao foi possivel listar o item usuario desejado!" })
         }
     },
     async inserirItemUsuario(req, res) {
@@ -61,7 +61,6 @@ module.exports = {
 }
 
 function trataItensUsuario(arr){
-
     let itensUsuario = [];
     for (let i = 0; i < arr.length; i++) {
         itensUsuario.push({ id: arr[i].id, itemId: arr[i].itemId, usuario_id: arr[i].usuarioId })

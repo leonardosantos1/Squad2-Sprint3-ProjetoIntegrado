@@ -55,7 +55,7 @@ module.exports = {
             }
         )(req, res, next);
     },
-    beareradm: (req, res, next) => {
+    bearerAdm: (req, res, next) => {
         passport.authenticate(
             'bearer', { session: false },
             async(erro, usuario, info) => {
