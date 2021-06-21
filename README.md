@@ -4,7 +4,7 @@ Projeto integrado da squade 2 na sprint 4
 Utilizamos o database chamado "controle"
 
 Criar arquivo .env, e colocar a criar CHAVE_JWT
-Gerar chave alheatoria JWT:
+Gerar chave aleatória JWT:
 node -e "console.log( require('crypto').randomBytes(256).toString('base64'))" 
 colocar o valor desse comando na variavel CHAVE_JWT
 
@@ -13,16 +13,15 @@ Nessa etapa do projeto decidimos criar uma branch separada chamada "TypeScript" 
 Para clonar essa parte do projeto, você consegue utilizando o comando:
 git clone -b TypeScript https://github.com/dev-ViniciusMonteiro/Squad2-Sprint3-ProjetoIntegrado 
 
-API agora não necessita mais utilizar os comando de sequelize-cli db:migrate, basta inicia-la com o comando "npm run dev", e ela criará as tabelas e subirá normalmente
+API agora não necessita mais utilizar os comandos como: npx sequelize-cli db:migrate, basta inicia-la com o comando "npm run dev", e ela criará as tabelas e subirá normalmente
 
-Disponibilizamos coleções do postman das tabelas:
+Disponibilizamos coleções do Postman das tabelas:
 Usuario, Login, Tipo, Item
-
 
 Creio que para utilizar a colecao do Postman disponibilizada basta arrastar para dentro do Postman que aparecerá as mesma para os testes.
 
 Leonardo:
-    Refatoração  de código para Typescript
+    Refatoração de código para Typescript
     Formatação para camelCase
     Tratamento de erros (console.log)
     Aplicação padrão REST nas rotas da API
@@ -46,8 +45,7 @@ Vinicius:
 
 Os tópicos não listados ja estavam implementados em nossa API na versão anterior
 
-A parte de docker e kubernetes tentamos implementar mas no final não tivemos exito, deixamos um dos Dockerfiles e alguns arquivos kubernetes que utilizamos em nossas tentivas
-
+A parte de docker e kubernetes tentamos implementar mas no final não tivemos sucesso, deixamos um dos Dockerfiles e alguns arquivos kubernetes que utilizamos em nossas tentativas
 
 Requisicoes:
  -Cadastro usuario: {"nome":"xxxxxx", "cpf":"xxxxxxxxxxx", "senha":"xxx"}
