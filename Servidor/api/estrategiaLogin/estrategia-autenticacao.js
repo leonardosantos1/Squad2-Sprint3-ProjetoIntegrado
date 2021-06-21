@@ -1,10 +1,9 @@
 const passport = require('passport')
 const localStrategy = require('passport-local').Strategy
-const db = require('../models')
+import db from '../models'
 const bcrypt = require('bcrypt')
 const BearerStrategy = require('passport-http-bearer').Strategy;
 const jwt = require('jsonwebtoken')
-
 
 function verificaUsuario(usuario){
     if(!usuario){

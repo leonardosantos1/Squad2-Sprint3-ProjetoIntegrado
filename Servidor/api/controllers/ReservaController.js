@@ -1,4 +1,4 @@
-const database =  require('../models')
+import database from '../models'
 
 module.exports = {
     async listarReservas(req,res){
@@ -6,14 +6,16 @@ module.exports = {
             const reservas = await database.Reserva.findAll()
             return res.status(200).json(trataReservas(reservas))
         }catch(error){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel listar as reservas desejada!"})
         }
     },
     async listarReserva(req,res){
         try{
             const reserva = await database.Reserva.findByPk(req.params.id)
-            return res.status(200).json(trataReserva(reserva))
+            return res.status(200).json({dataReserva:reserva.dataReserva, checkout:reserva.checkout, itemUsuarioId:reserva.itemIsuarioId})
         }catch(error){
+            console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel listar a reserva desejada!"})
         }
     },
@@ -21,12 +23,13 @@ module.exports = {
         try{
             if(req.is('json')){
                 const reserva = await database.Reserva.create(req.body)
-            return res.status(201).json(trataReserva(reserva))
+            return res.status(201).json({dataReserva:reserva.dataReserva, checkout:reserva.checkout, itemUsuarioId:reserva.itemIsuarioId})
             }else{
                 throw new Error ("Desculpe, mas nao foi possivel inserir um novo usuario!")
             } 
         }catch(error){
-            return res.status(400).json({erro:"Desculpe, mas nao foi possivel inserir um novo usuario!"})
+            console.log(error.message)
+            return res.status(400).json({erro:"Desculpe, mas nao foi possivel inserir uma nova reserva!"})
         }
     },
     async atualizarReserva(req,res){
@@ -34,14 +37,14 @@ module.exports = {
             if(req.is('json')){
                 const reserva = await database.Reserva.findByPk(req.params.id)
                 await reserva.update(req.body)
-                res.status(200).json(trataReserva(reserva))
+                res.status(200).json({dataReserva:reserva.dataReserva, checkout:reserva.checkout, itemUsuarioId:reserva.itemIsuarioId})
             }else{
-                throw new Error("Desculpe, mas nao foi possivel atualizar um novo usuario!")
+                throw new Error("Desculpe, mas nao foi possivel inserir uma nova reserva!")
             }
         }catch(error){
-            return res.status(400).json({erro:"Desculpe, mas nao foi possivel atualizar um novo usuario!"})
+            console.log(error.message)
+            return res.status(400).json({erro:"Desculpe, mas nao foi possivel inserir uma nova reserva!"})
         }
-
     },
     async deletarReserva(req,res){
         try{
@@ -49,20 +52,16 @@ module.exports = {
             await reserva.destroy(req.body)
             return res.status(200).json({msg:"Reserva deletada com sucesso!"})
         }catch(error){
-            return res.status(400).json({erro:"Desculpe, mas nao foi possivel deletar o usuario desejado!"})
+            console.log(error.message)
+            return res.status(400).json({erro:"Desculpe, mas nao foi possivel deletar a reserva desejada!"})
         }
-
     }
 }
 
 function trataReservas(arr){
     let reserva = [];
-    for(i = 0 ; i < arr.length ; i++){
-        reserva.push({id:arr[i].id,data_reserva: arr[i].data_reserva, checkout: arr[i].checkout, item_usuario_id: arr[i].item_usuario_id})
+    for(let i = 0 ; i < arr.length ; i++){
+        reserva.push({id:arr[i].id,dataReserva: arr[i].dataReserva, checkout: arr[i].checkout, itemUsuarioId: arr[i].itemIsuarioId})
     }
     return reserva
-}
-
-function trataReserva(reserva){ 
-    return {data_reserva:reserva.data_reserva, checkout:reserva.checkout, item_usuario_id:reserva.item_usuario_id}
 }
