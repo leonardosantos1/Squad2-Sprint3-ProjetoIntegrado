@@ -27,7 +27,7 @@ Leonardo:
     Aplicação padrão REST nas rotas da API
     Coleção Postman
     Tentativa de implementação do Dockerfile
-    e Kubernetes
+    e  Tentativa de implementação parte Kubernetes
 
 Gustavo:
     Tratamento de Dados
