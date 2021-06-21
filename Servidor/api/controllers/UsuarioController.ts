@@ -2,8 +2,6 @@ import database from '../models'
 import {Request,Response} from 'express'
 import senhaHash from '../estrategiaLogin/senhaHashController'
 
-//import trataUsuarios from '../tratamentoControllers/UsuarioController'
-
 class UsuarioController{
 
     async listarUsuarios(req:Request,res:Response){
@@ -74,7 +72,6 @@ class UsuarioController{
 
 export default new UsuarioController()
 
-
 function trataUsuarios(arr:any){
     
     let usuario = [];
@@ -83,12 +80,3 @@ function trataUsuarios(arr:any){
     }
     return usuario
 }
-
-/*
-function trataUsuarios(arr){
-    let usuario = [];
-    for(i = 0 ; i < arr.length ; i++){
-        usuario.push({nome: arr[i].nome, cpf: arr[i].cpf})
-    }
-    return usuario
-}*/

@@ -8,5 +8,4 @@ router.post('/',middlewaresAutenticacao.bearer,itemUsuarioController.inserirItem
 router.put('/:id',middlewaresAutenticacao.bearer,itemUsuarioController.atualizarItemUsuario)
 router.delete("/:id",middlewaresAutenticacao.bearerAdm,itemUsuarioController.deletarItemUsuario)
 
-
 module.exports = router

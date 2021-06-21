@@ -1,8 +1,6 @@
 import {Router} from 'express'
 const router =  Router()
-
 import usuarioController from '../controllers/UsuarioController'
-
 const middlewaresAutenticacao = require('../estrategiaLogin/middlewares-autenticacao')
 
 router.get('/',usuarioController.listarUsuarios)

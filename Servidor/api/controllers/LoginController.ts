@@ -40,7 +40,7 @@ class LoginController{
                     if(usurioaAdm){
                         req.body.senha = await senhaHash.adicionaSenhaAdm(req)
                         await database.Login.update({ senha: req.body.senha }, {where: {usuarioId: usurioaAdm.id}});
-                        return res.status(201).json({"Cargo_atribuido":"Administrador"})
+                        return res.status(201).json({"CargoAtribuido":"Administrador"})
                     } 
                 }
                 if(req.body.usuarioId && req.body.senha){   
@@ -48,7 +48,7 @@ class LoginController{
                     if(usurioaAdm){
                         req.body.senha = await senhaHash.adicionaSenhaAdm(req)
                         await database.Login.update({ senha: req.body.senha }, {where: {usuarioId: req.body.usuarioId}});
-                        return res.status(201).json({"Cargo_atribuido":"Administrador"})
+                        return res.status(201).json({"CargoAtribuido":"Administrador"})
                     }   
                 }else{
                     req.body.senha = await senhaHash.adicionaSenhaAdm(req)
@@ -87,8 +87,6 @@ function criaTokenJWT(login:{id:number, senha:string, usuarioId:number}){
     return token;
 }
 export default new LoginController()
-
-
 
 function trataLogins(arr:any){
     let login = [];

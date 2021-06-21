@@ -20,5 +20,4 @@ class senhaHash {
         return senhaHash
     }
 }
-
 module.exports = new senhaHash()

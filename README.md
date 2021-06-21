@@ -1,5 +1,5 @@
 # Squad2-Sprint3-ProjetoIntegrado
-Projeto integrado da squade 2 na sprint 3
+Projeto integrado da squade 2 na sprint 4
 
 Utilizamos o database chamado "controle"
 
@@ -8,50 +8,45 @@ Gerar chave alheatoria JWT:
 node -e "console.log( require('crypto').randomBytes(256).toString('base64'))" 
 colocar o valor desse comando na variavel CHAVE_JWT
 
-Tabelas:
-    -tipo (Gustavo)
-    -Usuario (Vinicius)
-    -item, item_usuario, login e resrerva (Leonardo)
+Nessa etapa do projeto decidimos criar uma branch separada chamada "TypeScript" onde está todo o nosso desenvolvimento da sprint 4 do projeto
 
-Migration e model:
-    -Leonardo
+Para clonar essa parte do projeto, você consegue utilizando o comando:
+git clone -b TypeScript https://github.com/dev-ViniciusMonteiro/Squad2-Sprint3-ProjetoIntegrado 
 
-JWT:
-    -Vinicius
+API agora não necessita mais utilizar os comando de sequelize-cli db:migrate, basta inicia-la com o comando "npm run dev", e ela criará as tabelas e subirá normalmente
 
-Tratamento de dados:
-    -Gustavo
+Disponibilizamos coleções do postman das tabelas:
+Usuario, Login, Tipo, Item
 
-Passo a Passo:
-1) Criar usuario (/usuario/inserir)
-2) Criar login do usuario criado (/login/criar)
-3) Fazer login com o login criado (/login/entrar) (nessa etapa será gerado o token local)
-4) Criar tipo (tipo/inserir)
-5) Criar item (item/inserir)
-6) Criar ItemUsuario (itemUsuario/inserir)
-7) Criar Reserva (reserva/inserir)
 
-OBS: Para todas as rotas que foram de inserir, atualizar e deletar, voce deve ter o token de acesso (gerado na etapa 3), com exceçao das rotas de inserir do usuario e criar o login.
+Creio que para utilizar a colecao do Postman disponibilizada basta arrastar para dentro do Postman que aparecerá as mesma para os testes.
 
-USUARIO:
-    atributos:
-    nome(varchar), cpf(varchar)
+Leonardo:
+    Refatoração  de código para Typescript
+    Formatação para camelCase
+    Tratamento de erros (console.log)
+    Aplicação padrão REST nas rotas da API
+    Coleção Postman
+    Tentativa de implementação do Dockerfile
+    e Kubernetes
 
-LOGIN:
-    atributos:
-    id(integer), usuario_id(integer), senha(varchar) 
+Gustavo:
+    Tratamento de Dados
+    Ajuste de nomes de variaveis com nomes estranhos
+    Tentativa de implementação do Dockerfile e Kubernetes
 
-TIPO:
-    atributos:
-    categoria(varchar), tipo_id(integer)   
+Vinicius:
+    Não exposicao da senha hash
+    Aplicação padrão REST nas rotas da API
+    Geração de Login Administrator
+    Conseguir efetuar login com o cpf do usuario
+    Criação de Login junto a Usuario
+    Subir Cargo Administrador
+    Tentativa de implementação do Dockerfile
 
-ITEM_USUARIO:
-    atributos:
-    item_id(integer), usuario_id(integer)
+Os tópicos não listados ja estavam implementados em nossa API na versão anterior
 
-RESERVA:
-    atributos:
-    data_reserva(date), checkout(date), item_usuario_id(integer)    
+A parte de docker e kubernetes tentamos implementar mas no final não tivemos exito, deixamos um dos Dockerfiles e alguns arquivos kubernetes que utilizamos em nossas tentivas
 
 
 Requisicoes:
