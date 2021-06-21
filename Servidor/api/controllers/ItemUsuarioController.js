@@ -45,7 +45,6 @@ module.exports = {
             console.log(error.message)
             return res.status(400).json({ erro: "Desculpe, mas nao foi possivel atualizar o item usuario desejado!" })
         }
-
     },
     async deletarItemUsuario(req, res) {
         try {
@@ -56,7 +55,6 @@ module.exports = {
             console.log(error.message)
             return res.status(400).json({ erro: "Desculpe, mas nao foi possivel deletar o item usuario desejado!" })
         }
-
     }
 }
 
@@ -67,7 +65,3 @@ function trataItensUsuario(arr){
     }
     return itensUsuario
 }
-
-/*function trataItemUsuario(itemUsu) {
-    return { id: itemUsu.id, item_id: itemUsu.item_id, usuario_id: itemUsu.usuario_id }
-}*/

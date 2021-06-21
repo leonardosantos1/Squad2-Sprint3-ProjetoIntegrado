@@ -45,7 +45,6 @@ module.exports = {
             console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel inserir uma nova reserva!"})
         }
-
     },
     async deletarReserva(req,res){
         try{
@@ -56,7 +55,6 @@ module.exports = {
             console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel deletar a reserva desejada!"})
         }
-
     }
 }
 
@@ -67,7 +65,3 @@ function trataReservas(arr){
     }
     return reserva
 }
-
-/*function trataReserva(reserva){ 
-    return {data_reserva:reserva.data_reserva, checkout:reserva.checkout, item_usuario_id:reserva.item_usuario_id}
-}*/

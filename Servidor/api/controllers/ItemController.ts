@@ -1,7 +1,6 @@
 import database from '../models'
 import {Request,Response} from 'express'
 
-
 class ItemController {
     async listarItens(req:Request ,res:Response){
         try{
@@ -47,7 +46,6 @@ class ItemController {
             console.log(error.message)
             return res.status(400).json({erro:"Desculpe mas nao foi possivel atualizar o item desejado!"})
         }
-
     }
     async deletarItem(req:Request,res:Response){
         try{
@@ -58,10 +56,8 @@ class ItemController {
             console.log(error.message)
             return res.status(400).json({erro:"Desculpe mas nao foi possivel deletar o item desejado!"})
         }
-
     }
 }
-
 export default new ItemController()
 
 function trataItens(arr:any){
@@ -71,7 +67,3 @@ function trataItens(arr:any){
     }
     return item
 }
-
-/*function item{ 
-    return {id:item.id numeracao:item.numeracao tipo_id:item.tipo_id}
-}*/

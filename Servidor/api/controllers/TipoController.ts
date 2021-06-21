@@ -47,7 +47,6 @@ class TipoController {
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel atualizar o tipo desejado!"})
         }
     }
-
     async deletarTipo(req:Request,res:Response){
         try{
             const tipo = await database.Tipo.findByPk(req.params.id)
@@ -57,7 +56,6 @@ class TipoController {
             console.log(error.message)
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel deletar o Tipo!"})
         }
-
     }
 }
 
@@ -70,6 +68,3 @@ function trataTipos(arr:any){
     }
     return tipo
 }
-/*function tipo{ 
-    return {id:tipo.id, categoria:tipo.categoria}
-}*/

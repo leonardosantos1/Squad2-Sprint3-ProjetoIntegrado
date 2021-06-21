@@ -9,5 +9,4 @@ router.post('/',middlewaresAutenticacao.bearerAdm,tipoController.inserirTipo)
 router.put('/:id',middlewaresAutenticacao.bearerAdm,tipoController.atualizarTipo)
 router.delete("/:id",middlewaresAutenticacao.bearerAdm,tipoController.deletarTipo)
 
-
 export default router
