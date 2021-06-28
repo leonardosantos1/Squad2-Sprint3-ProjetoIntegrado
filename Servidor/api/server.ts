@@ -2,6 +2,7 @@ require('dotenv').config()
 const middlewaresAutenticacao = require('./estrategiaLogin/middlewares-autenticacao')
 import {Request, Response, NextFunction} from 'express'
 import camelCaseKeys from 'camelcase-keys'
+const logger = require('./config/logger')
 
 const camelCase = ()=>{
     return function (req : Request, res : Response, next : NextFunction) {
@@ -36,5 +37,8 @@ app.use('/itemUsuario',rotaItemUsuario)
 app.use('/reserva',rotaReserva)
 
 db.sequelize.sync().then(()=>{
-    app.listen(3000,()=>console.log("APP ESCUTANDO NA PORTA 3000"))
+    app.listen(3000,()=>{
+        logger.log('info',`Servidor rodando na porta: 3000`)
+        console.log("APP ESCUTANDO NA PORTA 3000")
+    })
 })
