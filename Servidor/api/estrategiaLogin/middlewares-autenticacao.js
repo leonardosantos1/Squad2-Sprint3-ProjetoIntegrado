@@ -45,6 +45,8 @@ module.exports = {
                 req.user = usuario;
                 const dadosUsuario = await database.Usuario.findByPk(usuario.usuarioId)
                 req.user.nome = dadosUsuario.nome
+                req.headers.userId = dadosUsuario.id
+                req.headers.userNome = dadosUsuario.nome
                 if (usuario.senha.indexOf("$14") === 3) {
                     req.user.Admin = true
                     console.log("ADMIN" + " Nome: " + dadosUsuario.nome)
@@ -70,7 +72,8 @@ module.exports = {
                 }
                 req.user = usuario;
                 const dadosUsuario = await database.Usuario.findByPk(usuario.usuarioId)
-                    //console.log(dadosUsuario)
+                req.headers.userId = dadosUsuario.id
+                req.headers.userNome = dadosUsuario.nome
                 if (usuario.senha.indexOf("$14") === 3) {
                     req.user.Admin = true
                     console.log("ADMIN" + " Nome: " + dadosUsuario.nome)
