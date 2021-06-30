@@ -75,9 +75,22 @@ class LoginController{
     async atualizarLogin(req:Request,res:Response){
         try{
             if(req.is('json')){
-                const login = await database.Login.findByPk(req.params.id)
+                let identificador = req.params.id;
+                if(identificador.length<=10){
+                    identificador = req.params.id
+                }else{
+                    const usuario = await database.Usuario.findOne({ where: { cpf: req.params.id } })
+                    const login = await database.Login.findOne({ where: { usuarioId: usuario.id } })
+                    identificador = login.id     
+                }
+                const login = await database.Login.findByPk(identificador)
+                if(login.senha.indexOf("$14") === 3){
+                    req.body.senha = await senhaHash.adicionaSenhaAdm(req)
+                }else{
+                    req.body.senha = await senhaHash.adicionaSenha(req)
+                } 
                 await login.update(req.body)
-                logger.log('info',`Requisicao PUT /login/admin/${req.params.id}  FROM: id:${req.headers.userId} nome:${req.headers.userNome}`)
+                logger.log('info',`Requisicao PUT /login/admin/${req.params.id} ATUALIZOU:SENHA FROM: id:${req.headers.userId} nome:${req.headers.userNome}`)
                 res.status(200).json({"usuarioId":login.usuarioId, "senha":login.senha})
             }else{
                 logger.error(`ERRO - Requisicao PUT /login/admin${req.params.id} . Erro:Formato incompativel  FROM: id:${req.headers.userId} nome:${req.headers.userNome}`,'error')

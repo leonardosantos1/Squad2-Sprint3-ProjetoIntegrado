@@ -53,8 +53,9 @@ class UsuarioController{
         try{
             if(req.is('json')){
                 const usuario = await database.Usuario.findByPk(req.params.id)
+                const usuarioAntigo = usuario
                 await usuario.update(req.body)
-                logger.log('info',`Requisicao PUT /usuarios/${req.params.id}  FROM: id:${req.headers.userId} nome:${req.headers.userNome}`)
+                logger.log('info',`Requisicao PUT /usuarios/${req.params.id} ATUALIZOU:${usuarioAntigo} PARA:${usuario}  FROM: id:${req.headers.userId} nome:${req.headers.userNome}`)
                 res.status(200).json({id:usuario.id, nome:usuario.nome, cpf:usuario.cpf})
             }else{
                 logger.error(`ERRO - Requisicao PUT /usuarios/${req.params.id}  FROM: id:${req.headers.userId} nome:${req.headers.userNome}. Erro: Dados inconsistentes`,'error')
