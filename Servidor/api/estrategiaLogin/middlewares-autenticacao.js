@@ -59,7 +59,6 @@ module.exports = {
                     return res.status(401).json()
                 }
                 req.user = usuario;
-                console.log(req.user.usuarioId)
                 const dadosUsuario = await database.Usuario.findByPk(usuario.usuarioId)
                 req.user.nome = dadosUsuario.nome
                 req.headers.userId = dadosUsuario.id
