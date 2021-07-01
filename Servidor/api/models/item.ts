@@ -39,7 +39,7 @@ module.exports = (sequelize:any, DataTypes:any) => {
       validate:{
         isNumeric: true
       },
-      unique:true //mudei aqui
+      unique:true
     },
     tipoId:{
       type: DataTypes.INTEGER,
