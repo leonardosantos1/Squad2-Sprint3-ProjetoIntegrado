@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+spec:
+  selector:
+    matchLabels:
+      name: api-deployment
+  template:
+    metadata:
+      labels:
+        name: api-deployment
+    spec:
+      containers:
+        - name: api-deployment
+          image: leonardosantos1/docker-api
+          resources:
+            requests:
+              cpu: 400m
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DB_USER
+              value: "root"
+            - name: DB_PASSWORD
+              value: "admin"
+            - name: DB_HOST
+              value: "svc-db-api"
+            - name: DB_DATABASE
+              value: "controle"
