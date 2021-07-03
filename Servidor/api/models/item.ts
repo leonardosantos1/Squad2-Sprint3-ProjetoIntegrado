@@ -38,7 +38,8 @@ module.exports = (sequelize:any, DataTypes:any) => {
       type:DataTypes.INTEGER,
       validate:{
         isNumeric: true
-      }
+      },
+      unique:true
     },
     tipoId:{
       type: DataTypes.INTEGER,

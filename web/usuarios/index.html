@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+</head>
+<div class="container mt-4">
+    <h2>Cadastrar novo Usuario</h2>
+
+    <div class="mb-3">
+        <label for="nome" class="form-label">NOME</label>
+        <input type="text" class="form-control" id="nome"></input>
+    </div>
+    <div class="mb-3 col-6">
+        <label for="cpf" class="form-label">CPF</label>
+        <input type="number" class="form-control" id="cpf">
+    </div>
+    <div class="mb-3">
+        <label for="senha" class="form-label">SENHA</label>
+        <input type="text" class="form-control" id="senha">
+    </div>
+    <div class="col-12 text-end">
+        <button type="submit" onclick="cadastrar()" class="btn btn-primary">Cadastrar</button>
+    </div>
+
+</div>
+
+<body>
+    <div class="container mt-4">
+        <table class="table">
+            <thead id="top">
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">CPF</th>
+                </tr>
+            </thead>
+            <tbody id="tabela">
+            </tbody>
+        </table>
+        <div class="col-12 text-end">
+            <button type="button" onclick="listar()" class="btn btn-primary">Listar</button>
+        </div>
+    </div>
+</body>
+
+
+
+</html>
+<script src="index.js"></script>

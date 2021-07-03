@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt')
 const BearerStrategy = require('passport-http-bearer').Strategy;
 const jwt = require('jsonwebtoken')
 
-
 function verificaUsuario(usuario){
     if(!usuario){
         throw new InvalidArgumentError('Nao existe usuario com esse email!')

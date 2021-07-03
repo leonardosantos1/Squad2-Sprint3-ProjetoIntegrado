@@ -11,11 +11,7 @@ interface LoginAttributes{
 
 module.exports = (sequelize:any, DataTypes:any) => {
   class Login extends Model<LoginAttributes>  implements  LoginAttributes{
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+    
     id!:number
     senha!:string
     usuarioId!:number
