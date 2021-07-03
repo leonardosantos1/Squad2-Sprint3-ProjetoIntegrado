@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-api-deployment
+spec:
+  selector:
+    matchLabels:
+      name: db-api-deployment
+  template:
+    metadata:
+      labels:
+        name: db-api-deployment
+    spec:
+      containers:
+        - name: db-api-deployment
+          image: mysql:latest
+          resources:
+            requests:
+              cpu: 400m
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "admin"
+            - name: MYSQL_DATABASE
+              value: "controle"  
+              
