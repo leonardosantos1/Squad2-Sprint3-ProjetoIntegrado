@@ -5,9 +5,9 @@ const logger = require('../config/logger')
 class ItemController {
     async listarItens(req:Request ,res:Response){
         try{
-            const itens = await database.Item.findAll()
+            const itens = await database.Item.findAll({attributes:["id", "numeracao", "tipoId"]})
             logger.log('info',`Requisicao GET /item/`)
-            return res.status(200).json(trataItens(itens))
+            return res.status(200).json(itens)
         }catch(error: any){
             logger.error(`ERRO - Requisicao GET /item/. Erro:${error.message}`,'error')
             return res.status(400).json({erro:'Desculpe mas não foi possivel listar os itens!'})
@@ -69,10 +69,3 @@ class ItemController {
 }
 export default new ItemController()
 
-function trataItens(arr:any){
-    let item = [];
-    for(let i: any = 0 ; i < arr.length ; i++){
-        item.push({id: arr[i].id, numeracao: arr[i].numeracao, tipoId: arr[i].tipoId})
-    }
-    return item
-}

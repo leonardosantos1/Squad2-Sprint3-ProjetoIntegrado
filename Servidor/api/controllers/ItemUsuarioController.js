@@ -4,9 +4,9 @@ const logger = require('../config/logger')
 module.exports = {
     async listarItensUsuario(req, res) {
         try {
-            const itensUsu = await database.item_usuario.findAll()
+            const itensUsu = await database.item_usuario.findAll({attributes:["id", "itemId", "usuarioId"]})
             logger.log('info', `Requisicao GET /itemUsuario/`)
-            return res.status(200).json(trataItensUsuario(itensUsu))
+            return res.status(200).json(itensUsu)
         } catch (error) {
             logger.error(`ERRO - Requisicao GET /itemUsuario/. Erro:${error.message}`, 'error')
             return res.status(400).json({ erro: "Desculpe, mas nao foi possivel listar os itens usuarios!" })
@@ -65,10 +65,3 @@ module.exports = {
     }
 }
 
-function trataItensUsuario(arr) {
-    let itensUsuario = [];
-    for (let i = 0; i < arr.length; i++) {
-        itensUsuario.push({ id: arr[i].id, itemId: arr[i].itemId, usuario_id: arr[i].usuarioId })
-    }
-    return itensUsuario
-}

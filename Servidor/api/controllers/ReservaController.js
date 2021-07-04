@@ -4,9 +4,9 @@ const logger = require('../config/logger')
 module.exports = {
     async listarReservas(req, res) {
         try {
-            const reservas = await database.Reserva.findAll()
+            const reservas = await database.Reserva.findAll({attributes:["dataReserva", "checkout", "itemUsuarioId"]})
             logger.log('info', `Requisicao GET /reserva/`)
-            return res.status(200).json(trataReservas(reservas))
+            return res.status(200).json(reservas)
         } catch (error) {
             logger.error(`ERRO - Requisicao GET /reserva/. Erro:${error.message}`, 'error')
             return res.status(400).json({ erro: "Desculpe, mas nao foi possivel listar as reservas desejada!" })
@@ -66,10 +66,3 @@ module.exports = {
     }
 }
 
-function trataReservas(arr) {
-    let reserva = [];
-    for (let i = 0; i < arr.length; i++) {
-        reserva.push({ id: arr[i].id, dataReserva: arr[i].dataReserva, checkout: arr[i].checkout, itemUsuarioId: arr[i].itemUsuarioId })
-    }
-    return reserva
-}

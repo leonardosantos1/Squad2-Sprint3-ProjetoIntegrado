@@ -7,9 +7,9 @@ const logger = require('../config/logger')
 class LoginController{
     async listar(req:Request,res:Response){
         try{
-            const login = await database.Login.findAll()
+            const login = await database.Login.findAll({attributes:["id"]})
             logger.log('info',`Requisicao GET /login`)
-            return res.status(200).json(trataLogins(login))
+            return res.status(200).json(login)
         }catch(error: any){
             logger.error(`ERRO - Requisicao GET /usuarios. Erro:${error.message}`,'error')
             return res.status(400).json({erro:"Desculpa, mas nao foi possivel listar os logins!"})
@@ -113,10 +113,4 @@ function criaTokenJWT(login:{id:number, senha:string, usuarioId:number}){
 }
 export default new LoginController()
 
-function trataLogins(arr:any){
-    let login = [];
-    for(let i:any = 0 ; i < arr.length ; i++){
-        login.push({id:arr[i].id})
-    }
-    return login
-}
+

@@ -5,9 +5,9 @@ const logger = require('../config/logger')
 class TipoController {
     async listarTipos(req:Request,res:Response){
         try{
-            const tipos = await database.Tipo.findAll()
+            const tipos = await database.Tipo.findAll({attributes:["id", "categoria"]})
             logger.log('info',`Requisicao GET /tipo/`)
-            return res.status(200).json(trataTipos(tipos))
+            return res.status(200).json(tipos)
         }catch(error: any){
             logger.error(`ERRO - Requisicao GET /tipo/. Erro:${error.message}`,'error')
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel listar os tipos!"})
@@ -69,10 +69,4 @@ class TipoController {
 
 export default new TipoController()
 
-function trataTipos(arr:any){
-    let tipo = [];
-    for(let i:any = 0 ; i < arr.length ; i++){
-        tipo.push({id:arr[i].id, categoria:arr[i].categoria})
-    }
-    return tipo
-}
+

@@ -7,9 +7,9 @@ class UsuarioController{
 
     async listarUsuarios(req:Request,res:Response){
         try{
-            const usuarios = await database.Usuario.findAll()
+            const usuarios = await database.Usuario.findAll({attributes:["nome", "cpf"]})
             logger.log('info',`Requisicao GET /usuarios`)
-            return res.status(200).json(trataUsuarios(usuarios))
+            return res.status(200).json(usuarios)
         }catch(error: any){
             logger.error(`ERRO - Requisicao GET /usuarios. Erro:${error}`,'error')
             return res.status(400).json({erro:"Desculpe, mas nao foi possivel listar os usuarios!"})
@@ -82,11 +82,4 @@ class UsuarioController{
 
 export default new UsuarioController()
 
-function trataUsuarios(arr:any){
-    
-    let usuario = [];
-    for(let i: any = 0 ; i < arr.length ; i++){
-        usuario.push({nome: arr[i].nome, cpf: arr[i].cpf})
-    }
-    return usuario
-}
+
