@@ -5,13 +5,13 @@ const bcrypt = require('bcrypt')
 const BearerStrategy = require('passport-http-bearer').Strategy;
 const jwt = require('jsonwebtoken')
 
-function verificaUsuario(usuario){
+function verificaUsuario(usuario:any){
     if(!usuario){
-        throw new InvalidArgumentError('Nao existe usuario com esse email!')
+        throw new Error('Nao existe usuario com esse email!')
     }
 }
 
-async function verificaSenha(senha,senhaHash){
+async function verificaSenha(senha:any,senhaHash:any){
     const senhaInvalida = await bcrypt.compare(senha, senhaHash)
     if(!senhaInvalida){
         throw new Error("Usuario ou senha invalidos")
@@ -23,7 +23,7 @@ passport.use(
         usernameField: 'id',
         passwordField: 'senha',
         session: false
-    },async (id , senha, done)=>{
+    },async (id:any , senha:any, done:any)=>{
         try {
             const login = await db.Login.findByPk(id)
             verificaUsuario(login)
@@ -37,7 +37,7 @@ passport.use(
 
 passport.use(
     new BearerStrategy(
-        async (token,done)=>{
+        async (token:any,done:any)=>{
             try {
                 const payload = jwt.verify(token, process.env.CHAVE_JWT)
                 const login = await db.Login.findByPk(payload.id)

@@ -1,6 +1,6 @@
 import database from '../models'
 import {Request,Response} from 'express'
-import senhaHash from '../estrategiaLogin/senhaHashController'
+const senhaHash = require('../estrategiaLogin/senhaHashController')
 const logger = require('../config/logger')
 
 class UsuarioController{

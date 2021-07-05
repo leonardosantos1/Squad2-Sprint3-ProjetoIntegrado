@@ -3,7 +3,7 @@ import database from '../models'
 const logger = require('../config/logger')
 
 module.exports = {
-    local: async(req, res, next) => {
+    local: async(req:any, res:any, next:any) => {
         try {
             if (!req.body.id && req.body.cpf) {
                 const dadosUsuario = await database.Usuario.findOne({ where: { cpf: req.body.cpf } })
@@ -17,7 +17,7 @@ module.exports = {
             }
             passport.authenticate(
                 'local', { session: false },
-                (erro, usuario, info) => {
+                (erro:any, usuario:any, info:any) => {
                     if (erro && erro.name === 'InvalidArgumentError') {
                         logger.error(`ERRO - Requisicao JWT local. Erro:InvalidArgumentError FROM: id:${req.body.id} CPF:${req.body.cpf}`, 'error')
                         return res.status(401).json({ erro: "Argumento inválido!" })
@@ -42,10 +42,10 @@ module.exports = {
         }
 
     },
-    bearer: (req, res, next) => {
+    bearer: (req:any, res:any, next:any) => {
         passport.authenticate(
             'bearer', { session: false },
-            async(erro, usuario, info) => {
+            async(erro:any, usuario:any, info:any) => {
                 if (erro && erro.name === 'JsonWebTokenError') {
                     logger.error(`ERRO - Requisicao JWT local. Erro:JsonWebTokenError`, 'error')
                     return res.status(401).json()
@@ -73,10 +73,10 @@ module.exports = {
             }
         )(req, res, next);
     },
-    bearerAdm: (req, res, next) => {
+    bearerAdm: (req:any, res:any, next:any) => {
         passport.authenticate(
             'bearer', { session: false },
-            async(erro, usuario, info) => {
+            async(erro:any, usuario:any, info:any) => {
                 if (erro && erro.name === 'JsonWebTokenError') {
                     logger.error(`ERRO - Requisicao JWT local. Erro:JsonWebTokenError  `, 'error')
                     return res.status(401).json()
