@@ -1,5 +1,6 @@
-const router = require('express').Router()
-const itemUsuarioController = require("../controllers/ItemUsuarioController")
+import {Router } from 'express'
+const router = Router()
+import itemUsuarioController from '../controllers/ItemUsuarioController'
 const middlewaresAutenticacao = require('../estrategiaLogin/middlewares-autenticacao')
 
 router.get("/",itemUsuarioController.listarItensUsuario)
@@ -8,4 +9,4 @@ router.post('/',middlewaresAutenticacao.bearer,itemUsuarioController.inserirItem
 router.put('/:id',middlewaresAutenticacao.bearer,itemUsuarioController.atualizarItemUsuario)
 router.delete("/:id",middlewaresAutenticacao.bearerAdm,itemUsuarioController.deletarItemUsuario)
 
-module.exports = router
+export default router

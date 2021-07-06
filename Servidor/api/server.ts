@@ -20,9 +20,8 @@ import rotaUsuario from './routes/usuarioRota'
 import rotaLogin from './routes/loginRota'
 import rotaTipo from './routes/tipoRota'
 import rotaItem from './routes/itemRota'
-
-const rotaItemUsuario =  require('./routes/itemUsuarioRota')
-const rotaReserva =  require('./routes/reservaRota')
+import rotaItemUsuario from './routes/itemUsuarioRota'
+import rotaReserva from './routes/reservaRota'
 
 const {estrategiaAutenticacao} = require('./estrategiaLogin')
 
