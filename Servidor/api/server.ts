@@ -1,17 +1,7 @@
 require('dotenv').config()
 const middlewaresAutenticacao = require('./estrategiaLogin/middlewares-autenticacao')
-import {Request, Response, NextFunction} from 'express'
-import camelCaseKeys from 'camelcase-keys'
+const {camelCase} = require('./routes/camelCase')
 const logger = require('./config/logger')
-
-const camelCase = ()=>{
-    return function (req : Request, res : Response, next : NextFunction) {
-        req.body = camelCaseKeys(req.body, { deep: true })
-        req.params = camelCaseKeys(req.params)
-        req.query = camelCaseKeys(req.query)
-        next()
-      }
-}
 
 import express from 'express'
 const app  = express()
