@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt')
 
 class senhaHash {
-    async adicionaSenha(req) {
+    async adicionaSenha(req:any) {
         const senha = req.body.senha
         const custoHash = 12;
         if (!senha) {
@@ -10,7 +10,7 @@ class senhaHash {
         const senhaHash = await bcrypt.hash(senha, custoHash)
         return senhaHash
     }
-    async adicionaSenhaAdm(req) {
+    async adicionaSenhaAdm(req:any) {
         const senha = req.body.senha
         const custoHash = 14;
         if (!senha) {

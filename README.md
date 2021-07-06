@@ -1,4 +1,23 @@
 # Squad2-Sprint3-ProjetoIntegrado
+Projeto integrado da squade 2 na sprint 5	
+
+Vinicius:
+ -Implementou LOG
+ 
+Leonardo:
+ -Implementou Kubernets
+ 
+Gustavo:
+ -Melhoria no tratamento
+ 
+Obs: Variaveis de ambiente que estao no .env!!!
+DB_USER
+DB_PASSWORD
+DB_DATABASE
+DB_PORT
+DB_HOST
+
+-----------------------------------------------------------------------------------------------
 Projeto integrado da squade 2 na sprint 4
 
 Utilizamos o database chamado "controle"
