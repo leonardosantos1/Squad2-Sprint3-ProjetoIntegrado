@@ -91,7 +91,7 @@ class LoginController{
                 } 
                 await login.update(req.body)
                 logger.log('info',`Requisicao PUT /login/admin/${req.params.id} ATUALIZOU:SENHA FROM: id:${req.headers.userId} nome:${req.headers.userNome}`)
-                res.status(200).json({"usuarioId":login.usuarioId, "senha":login.senha})
+                res.status(200).json({"usuarioId":login.usuarioId})
             }else{
                 logger.error(`ERRO - Requisicao PUT /login/admin${req.params.id} . Erro:Formato incompativel  FROM: id:${req.headers.userId} nome:${req.headers.userNome}`,'error')
                 return res.status(400).json({erro:"Desculpe, mas nao foi possivel atualizar o login!"})
