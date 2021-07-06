@@ -2,6 +2,7 @@ import database from '../models'
 import {Request,Response} from 'express'
 const senhaHash = require('../estrategiaLogin/senhaHashController')
 const logger = require('../config/logger')
+import retornos = require('./retornosController')
 
 class UsuarioController{
 
@@ -9,20 +10,20 @@ class UsuarioController{
         try{
             const usuarios = await database.Usuario.findAll({attributes:["nome", "cpf"]})
             logger.log('info',`Requisicao GET /usuarios`)
-            return res.status(200).json(usuarios)
+            return res.status(200).json(retornos.retornos(true,'Listar usuarios',usuarios))
         }catch(error: any){
             logger.error(`ERRO - Requisicao GET /usuarios. Erro:${error}`,'error')
-            return res.status(400).json({erro:"Desculpe, mas nao foi possivel listar os usuarios!"})
+            return res.status(400).json(retornos.retornos(false,'Listar usuarios',{erro:"Desculpe, mas nao foi possivel listar os usuarios!"}))
         }
     }
     async listarUsuario(req:Request,res:Response){
         try{
             const usuario = await database.Usuario.findByPk(req.params.id)
             logger.log('info',`Requisicao GET /usuarios/${req.params.id}  FROM: id:${req.headers.userId} nome:${req.headers.userNome}`)
-            return res.status(200).json({id:usuario.id, nome:usuario.nome, cpf:usuario.cpf})
+            return res.status(200).json(retornos.retornos(true,'Listar usuario',{id:usuario.id, nome:usuario.nome, cpf:usuario.cpf}))
         }catch(error: any){ 
             logger.error(`ERRO - Requisicao GET /usuarios/${req.params.id}  FROM: id:${req.headers.userId} nome:${req.headers.userNome}. Erro: ${error.message}`,'error')
-            return res.status(400).json({erro:"Desculpe, mas nao foi possivel listar o usuario desejado!"})
+            return res.status(400).json(retornos.retornos(false,'Listar usuario',{erro:"Desculpe, mas nao foi possivel listar o usuario desejado!"}))
         } 
     }
     async inserirUsuario(req:Request,res:Response){
@@ -34,11 +35,11 @@ class UsuarioController{
                         await database.Login.create({usuarioId: usuario.id, senha: senhaCripto})
                         logger.log('info',`Requisicao POST /usuarios. Criar usuario: id:${usuario.id}`)
                         logger.log('info',`Requisicao POST /login. Criar usuario: id:${usuario.id}`)
-                        return res.status(201).json({"Login":usuario.cpf}) 
+                        return res.status(201).json(retornos.retornos(true,'Usuario e login criado',{"Login":usuario.cpf}))
                 }else{
                     const usuario = await database.Usuario.create(req.body)
                     logger.log('info',`Requisicao POST /usuarios. Criar usuario: id:${usuario.id}`)
-                    return res.status(201).json({id:usuario.id, nome:usuario.nome, cpf:usuario.cpf})  
+                    return res.status(201).json(retornos.retornos(true,'Usuario criado',{id:usuario.id, nome:usuario.nome, cpf:usuario.cpf})) 
                 }
             }else{
                 logger.error(`ERRO - Requisicao POST /usuarios. Erro: Dados inconsistentes`,'error')
@@ -46,7 +47,7 @@ class UsuarioController{
             } 
         }catch(error: any){
             logger.error(`ERRO - Requisicao POST /usuarios. Erro:${error.message}`,'error')
-            return res.status(400).json({erro:"Desculpe, mas nao foi possivel inserir um novo usuario!"})
+            return res.status(400).json(retornos.retornos(false,'Inserir usuarios',{erro:"Desculpe, mas nao foi possivel inserir um novo usuario!"}))
         }
     }
     async atualizarUsuario(req:Request,res:Response){
@@ -56,14 +57,14 @@ class UsuarioController{
                 const usuarioAntigo = usuario
                 await usuario.update(req.body)
                 logger.log('info',`Requisicao PUT /usuarios/${req.params.id} ATUALIZOU:${usuarioAntigo} PARA:${usuario}  FROM: id:${req.headers.userId} nome:${req.headers.userNome}`)
-                res.status(200).json({id:usuario.id, nome:usuario.nome, cpf:usuario.cpf})
+                res.status(200).json(retornos.retornos(true,'Atualizar usuario',{id:usuario.id, nome:usuario.nome, cpf:usuario.cpf}))
             }else{
                 logger.error(`ERRO - Requisicao PUT /usuarios/${req.params.id}  FROM: id:${req.headers.userId} nome:${req.headers.userNome}. Erro: Dados inconsistentes`,'error')
                 throw new Error("Desculpe, mas nao foi possivel atualizar o usuario desejado!")
             }
         }catch(error: any){
             logger.error(`ERRO - Requisicao PUT /usuarios/${req.params.id}  FROM: id:${req.headers.userId} nome:${req.headers.userNome}. Erro: ${error.message}`,'error')
-            return res.status(400).json({erro:"Desculpe, mas nao foi possivel atualizar o usuario desejado!"})
+            return res.status(400).json(retornos.retornos(false,'Atualizar usuarios',{erro:"Desculpe, mas nao foi possivel atualizar o usuario desejado!"}))
         }
 
     }
@@ -72,10 +73,10 @@ class UsuarioController{
             const usuario = await database.Usuario.findByPk(req.params.id)
             await usuario.destroy()
             logger.log('info',`Requisicao DELETE /usuarios/${req.params.id}  FROM: id:${req.headers.userId} nome:${req.headers.userNome}`)
-            return res.status(200).json({msg:"Usuario deletado com sucesso!"})
+            return res.status(200).json(retornos.retornos(true,'Deletar usuarios',usuario.nome))
         }catch(error: any){
             logger.error(`ERRO - Requisicao DELETE /usuarios/${req.params.id}  FROM: id:${req.headers.userId} nome:${req.headers.userNome}. Erro: ${error.message}`,'error')
-            return res.status(400).json({erro:"Desculpe, mas nao foi possivel deletar o usuario desejado!"})
+            return res.status(400).json(retornos.retornos(false,'Deletar usuarios',{erro:"Desculpe, mas nao foi possivel deletar o usuario desejado!"}))
         }
     }
 }
