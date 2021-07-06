@@ -27,6 +27,10 @@ class ItemController {
     async inserirItem(req:Request,res:Response){
         try{
             if(req.is('json')){
+                if(req.body.categoria){
+                    const tipo = await database.Tipo.findOne({ where: { categoria: req.body.categoria } })
+                    req.body.tipoId = tipo.id 
+                } 
                 const item = await database.Item.create(req.body)
                 logger.log('info',`Requisicao POST /item/ NOVO:tipoId:${req.body.tipoId}, Numero:${req.body.numeracao} FROM: id:${req.headers.userId} nome:${req.headers.userNome}`)
                 return res.status(201).json({id:item.id, numeracao:item.numeracao, tipoId:item.tipoId})
