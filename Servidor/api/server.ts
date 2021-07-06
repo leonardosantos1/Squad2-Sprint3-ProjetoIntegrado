@@ -22,6 +22,7 @@ import rotaTipo from './routes/tipoRota'
 import rotaItem from './routes/itemRota'
 import rotaItemUsuario from './routes/itemUsuarioRota'
 import rotaReserva from './routes/reservaRota'
+import resolveip from './routes/resolveip'
 
 const {estrategiaAutenticacao} = require('./estrategiaLogin')
 
@@ -34,6 +35,7 @@ app.use('/tipo',rotaTipo)
 app.use('/item',rotaItem)
 app.use('/itemUsuario',rotaItemUsuario)
 app.use('/reserva',rotaReserva)
+app.use('/resolveip',resolveip)
 
 db.sequelize.sync().then(()=>{
     app.listen(3000,()=>{
