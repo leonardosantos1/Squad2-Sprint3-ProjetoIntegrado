@@ -2,7 +2,7 @@ import database from '../models'
 import {Request,Response} from 'express'
 const logger = require('../config/logger')
 
-module.exports = {
+class ReservaController{
     async listarReservas(req:Request,res:Response) {
         try {
             const reservas = await database.Reserva.findAll({attributes:["dataReserva", "checkout", "itemUsuarioId"]})
@@ -12,7 +12,7 @@ module.exports = {
             logger.error(`ERRO - Requisicao GET /reserva/. Erro:${error.message}`, 'error')
             return res.status(400).json({ erro: "Desculpe, mas nao foi possivel listar as reservas desejada!" })
         }
-    },
+    }
     async listarReserva(req:Request,res:Response) {
         try {
             const reserva = await database.Reserva.findByPk(req.params.id)
@@ -22,7 +22,7 @@ module.exports = {
             logger.error(`ERRO - Requisicao GET /reserva/${req.params.id}. Erro:${error.message}`, 'error')
             return res.status(400).json({ erro: "Desculpe, mas nao foi possivel listar a reserva desejada!" })
         }
-    },
+    }
     async inserirReserva(req:Request,res:Response) {
         try {
             if (req.is('json')) {
@@ -37,7 +37,7 @@ module.exports = {
             logger.error(`ERRO - Requisicao POST /reserva/. Erro:${error.message}`, 'error')
             return res.status(400).json({ erro: "Desculpe, mas nao foi possivel inserir uma nova reserva!" })
         }
-    },
+    }
     async atualizarReserva(req:Request,res:Response) {
         try {
             if (req.is('json')) {
@@ -53,7 +53,7 @@ module.exports = {
             logger.error(`ERRO - Requisicao PUT /reserva/${req.params.id} . Erro:${error.message}`, 'error')
             return res.status(400).json({ erro: "Desculpe, mas nao foi possivel inserir uma nova reserva!" })
         }
-    },
+    }
     async deletarReserva(req:Request,res:Response) {
         try {
             const reserva = await database.Reserva.findByPk(req.params.id)
@@ -66,4 +66,4 @@ module.exports = {
         }
     }
 }
-
+export default new ReservaController()
