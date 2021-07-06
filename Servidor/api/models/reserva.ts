@@ -41,7 +41,7 @@ module.exports = (sequelize:any, DataTypes:any) => {
       itemUsuarioId:{
         type: DataTypes.INTEGER,
         allowNull:false,
-        references:{model:'item_usuario', key:'id'},
+        references:{model:'item_usuarios', key:'id'},
         onDelete:'CASCADE'
       }
   }, {

@@ -39,7 +39,7 @@ module.exports = (sequelize:any, DataTypes:any) => {
     itemId:{
       type:DataTypes.INTEGER,
       allowNull:false,
-      references:{model:'Item', key:'id'},
+      references:{model:'Items', key:'id'},
       onDelete:'CASCADE',
       validate:{
         isNumeric: true,
