@@ -1,5 +1,10 @@
-# Squad2-Sprint3-ProjetoIntegrado
-Projeto integrado da squade 2 na sprint 5	
+	
+<h1 align="center">
+  <h2>API para controle de salas</h2>
+</h1>
+
+# Squad2-Sprint3-ProjetoIntegrado 
+## Projeto integrado da squade 2 na sprint 5
 
 Vinicius:
  -Implementou LOG
