@@ -1,6 +1,6 @@
 import database from '../models'
 const senhaHash = require('../estrategiaLogin/senhaHashController')
-const jwt = require('jsonwebtoken')
+const jwt = require('../estrategiaLogin/tokenjwt')
 import {Request,Response} from 'express'
 const logger = require('../config/logger')
 import retornos = require('./retornosController')
@@ -17,7 +17,7 @@ class LoginController{
         }
     }
     login(req:Request,res:Response){
-        const token = criaTokenJWT(req.body)
+        const token = jwt.criaTokenJWT(req.body)
         res.set('Authorization', token)
         logger.log('info',`Requisicao POST /login FROM: id:${req.headers.userId} nome:${req.headers.userNome}`)
         res.status(204).send();
@@ -105,13 +105,6 @@ class LoginController{
     }
 }
 
-function criaTokenJWT(login:{id:number, senha:string, usuarioId:number}){
-    const payload = {
-        id: login.id
-    }
-    const token = jwt.sign(payload, process.env.CHAVE_JWT)
-    return token;
-}
 export default new LoginController()
 
 

@@ -50,6 +50,10 @@ module.exports = {
                     logger.error(`ERRO - Requisicao JWT local. Erro:JsonWebTokenError`, 'error')
                     return res.status(401).json()
                 }
+                if(erro && erro.name ==="TokenExpiredError"){//aqui
+                    logger.error(`ERRO - Requisicao JWT local. Erro:${erro} expirado: ${erro.expiredAt}`, 'error')
+                    return res.status(401).json({erro:"Desculpe, mas ocorreu um erro com o seu token!"})
+                }
                 if (erro) {
                     logger.error(`ERRO - Requisicao JWT local. Erro:${erro} `, 'error')
                     return res.status(500).json({ erro: "Desculpe, mas ocorreu um erro com o seu token!" })
