@@ -7,7 +7,6 @@ class ItemUsuario {
     async listarItensUsuario(req:Request,res:Response) {
         try {
             const itensUsu = await database.item_usuario.findAll({attributes:["id", "itemId", "usuarioId"]})
-            console.log(itensUsu)
             logger.log('info', `Requisicao GET /itemUsuario/`)
             return res.status(200).json(retornos.retornos(true,'Listar itemUsuarios',itensUsu))
         } catch (error:any) {

@@ -19,9 +19,6 @@ class UsuarioController{
     async listarUsuario(req:Request,res:Response){
         try{
             const usuario = await database.Usuario.findByPk(req.params.id)
-            if(usuario){
-                console.log("usuairo existe")
-            }
             logger.log('info',`Requisicao GET /usuarios/${req.params.id}  FROM: id:${req.headers.userId} nome:${req.headers.userNome}`)
             return res.status(200).json(retornos.retornos(true,'Listar usuario',{id:usuario.id, nome:usuario.nome, cpf:usuario.cpf}))
         }catch(error: any){ 
