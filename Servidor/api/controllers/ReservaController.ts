@@ -2,6 +2,7 @@ import database from '../models'
 import {Request,Response} from 'express'
 const logger = require('../config/logger')
 import retornos = require('./retornosController')
+const {dataConversor} = require('../utils/dataConversor')
 
 class ReservaController{
     async listarReservas(req:Request,res:Response) {
@@ -27,6 +28,8 @@ class ReservaController{
     async inserirReserva(req:Request,res:Response) {
         try {
             if (req.is('json')) {
+                req.body.dataReserva = dataConversor(req.body.dataReserva)
+                req.body.checkout = dataConversor(req.body.checkout)
                 const reserva = await database.Reserva.create(req.body)
                 logger.log('info', `Requisicao POST /reserva/ NOVO:itemUsuarioId:${req.body.itemUsuarioId}, dataReserva:${req.body.dataReserva}, checkout:${req.body.checkout}  FROM: id:${req.headers.userId} nome:${req.headers.userNome}`)
                 return res.status(201).json(retornos.retornos(true,'Inserir reserva',{ dataReserva: reserva.dataReserva, checkout: reserva.checkout, itemUsuarioId: reserva.itemIsuarioId }))
@@ -67,4 +70,5 @@ class ReservaController{
         }
     }
 }
+
 export default new ReservaController()

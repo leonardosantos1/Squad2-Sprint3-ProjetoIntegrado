@@ -2,6 +2,7 @@ import database from '../models'
 import {Request, Response} from 'express'
 const logger = require('../config/logger')
 import retornos = require('./retornosController')
+const {dataConversor} = require('../utils/dataConversor')
 
 class ItemUsuario {
     async listarItensUsuario(req:Request,res:Response) {
@@ -31,6 +32,8 @@ class ItemUsuario {
                 const itemUsu = await database.item_usuario.create(req.body)
                 logger.log('info', `Requisicao POST /itemUsuario/ NOVO:usuarioId:${req.headers.userId}, itemId:${req.body.itemId} FROM: id:${req.headers.userId} nome:${req.headers.userNome}`)
                 if(req.body.dataReserva && req.body.checkout){
+                    req.body.dataReserva = dataConversor(req.body.dataReserva)
+                    req.body.checkout = dataConversor(req.body.checkout)
                     const reserva = await database.Reserva.create({itemUsuarioId: itemUsu.id, dataReserva: req.body.dataReserva, checkout: req.body.checkout})
                     logger.log('info', `Requisicao POST /reserva/ NOVO:itemUsuarioId:${reserva.id}, dataReserva:${req.body.dataReserva}, checkout:${req.body.checkout}  FROM: id:${req.headers.userId} nome:${req.headers.userNome}`)
                 }

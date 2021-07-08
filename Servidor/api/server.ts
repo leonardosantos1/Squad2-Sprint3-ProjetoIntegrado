@@ -1,6 +1,6 @@
 require('dotenv').config()
 const middlewaresAutenticacao = require('./estrategiaLogin/middlewares-autenticacao')
-const {camelCase} = require('./routes/camelCase')
+const {camelCase} = require('./utils/camelCase')
 const logger = require('./config/logger')
 
 import express from 'express'
