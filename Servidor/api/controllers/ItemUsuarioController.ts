@@ -27,9 +27,14 @@ class ItemUsuario {
     async inserirItemUsuario(req:Request,res:Response) {
         try {
             if (req.is('json')) {
+                req.body.usuarioId = req.headers.userId
                 const itemUsu = await database.item_usuario.create(req.body)
-                logger.log('info', `Requisicao POST /itemUsuario/ NOVO:usuarioId:${req.body.usuarioId}, itemId:${req.body.itemId} FROM: id:${req.headers.userId} nome:${req.headers.userNome}`)
-                return res.status(201).json(retornos.retornos(true,'Inserir itemUsuario',{ id: itemUsu.id, itemId: itemUsu.itemId, usuarioId: itemUsu.usuarioId }))
+                logger.log('info', `Requisicao POST /itemUsuario/ NOVO:usuarioId:${req.headers.userId}, itemId:${req.body.itemId} FROM: id:${req.headers.userId} nome:${req.headers.userNome}`)
+                if(req.body.dataReserva && req.body.checkout){
+                    const reserva = await database.Reserva.create({itemUsuarioId: itemUsu.id, dataReserva: req.body.dataReserva, checkout: req.body.checkout})
+                    logger.log('info', `Requisicao POST /reserva/ NOVO:itemUsuarioId:${reserva.id}, dataReserva:${req.body.dataReserva}, checkout:${req.body.checkout}  FROM: id:${req.headers.userId} nome:${req.headers.userNome}`)
+                }
+                return res.status(201).json(retornos.retornos(true,'Inserir itemUsuario',{ id: itemUsu.id, itemId: itemUsu.itemId, usuarioId: itemUsu.usuarioId }))   
             } else {
                 throw new Error("Desculpe, mas nao foi possivel inserir o item usuario desejado!")
             }

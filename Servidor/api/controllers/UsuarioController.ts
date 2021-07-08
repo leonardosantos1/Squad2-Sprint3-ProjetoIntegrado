@@ -31,7 +31,6 @@ class UsuarioController{
             if(req.is('json')){
                 if(req.body.senha){
                         const usuario = await database.Usuario.create({nome: req.body.nome, cpf: req.body.cpf})
-                
                         const senhaCripto = await senhaHash.adicionaSenha(req)
                         await database.Login.create({usuarioId: usuario.id, senha: senhaCripto})
                         logger.log('info',`Requisicao POST /usuarios. Criar usuario: id:${usuario.id}`)
