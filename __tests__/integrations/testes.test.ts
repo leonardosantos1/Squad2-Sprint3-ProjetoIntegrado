@@ -62,3 +62,73 @@ describe('CRUD Entidade Usuario',()=>{
       expect(response.status).toBe(200)
    })
 })
+
+describe('CRUD Entidade Tipo',()=>{
+    beforeAll(async()=>{
+       await database.sequelize.sync()
+ 
+   })
+ 
+   afterAll(async()=>{
+      await database.sequelize.drop()
+     })
+ 
+     test('Deve conseguir realizar GET de Tipos',async()=>{
+       const response = await request(app)
+       .get('/tipo/')
+ 
+       expect(response.status).toBe(200)
+     })
+  
+     test('Deve conseguir realizar POST de Tipo', async()=>{
+       const token = await criaUsuarioAdmin()
+ 
+       const response1 =  await request(app)
+       .post('/tipo/')
+       .set('Authorization', `Bearer ${token}`)
+       .send({categoria:'sala'})
+ 
+       const response2 =  await request(app)
+       .post('/tipo/')
+       .set('Authorization', `Bearer ${token}`)
+       .send({categoria:'projetor'})
+ 
+       expect(response1.status).toBe(201)
+       expect(response2.status).toBe(201)
+     })
+ 
+     test('Deve conseguir realizar GET de Tipo especifico',async()=>{
+       const token = await criaUsuarioAdmin()
+       const tipo = await database.Tipo.findOne({where:{categoria:'sala'}})
+       
+       const response = await request(app)
+       .get(`/tipo/${tipo.id}`)
+       .set('Authorization',`Bearer ${token}`)
+ 
+       expect(response.status).toBe(200)
+     })
+ 
+     test('Deve conseguir realizar PUT de Tipo',async()=>{
+       const token = await criaUsuarioAdmin()
+       const tipo = await database.Tipo.findOne({where:{categoria:'sala'}})
+ 
+       const response = await request(app)
+       .put(`/tipo/${tipo.id}`)
+       .set('Authorization',`Bearer ${token}`)
+       .send({categoria:'mesa'})
+ 
+       expect(response.status).toBe(200)
+     })
+ 
+     test('Deve conseguir realizar DELETE de Tipo',async()=>{
+       const token = await criaUsuarioAdmin()
+       const tipo = await database.Tipo.findOne({where:{categoria:'projetor'}})
+ 
+       const response = await request(app)
+       .delete(`/tipo/${tipo.id}`)
+       .set('Authorization',`Bearer ${token}`)
+ 
+       expect(response.status).toBe(200)
+     })
+ })   
+ 
