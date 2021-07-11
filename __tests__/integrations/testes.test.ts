@@ -131,4 +131,69 @@ describe('CRUD Entidade Tipo',()=>{
        expect(response.status).toBe(200)
      })
  })   
+
+ describe("CRUD da Entidade Item",()=>{
+
+    beforeAll(async()=>{
+       await database.sequelize.sync()
+    })
+    
+    afterAll(async()=>{
+       await database.sequelize.drop()
+    })
+ 
+    test('Deve conseguir realizar GET de Itens',async()=>{
+       const response =  await request(app)
+       .get('/item/')
+ 
+       expect(response.status).toBe(200)
+    })
+ 
+    test('Deve conseguir realizar POST de Item',async()=>{
+       const tipo = await database.Tipo.create({categoria:'mesa'})
+       const token = await criaUsuarioAdmin()
+ 
+       const response = await request(app)
+       .post('/item/')
+       .set('Authorization', `Bearer ${token}`)
+       .send({numeracao:1, tipoId:tipo.id})
+ 
+       expect(response.status).toBe(201)
+    })
+    
+    test('Deve conseguir realizar GET em um Item especifico', async()=>{
+       const item =  await database.Item.findOne({where:{numeracao:1}})
+       const token = await criaUsuarioAdmin()
+ 
+       const response =  await request(app)
+       .get(`/item/${item.id}`)
+       .set('Authorization',`Bearer ${token}`)
+ 
+       expect(response.status).toBe(200)
+    })
+ 
+    test('Deve conseguir realizar PUT de Item', async()=>{
+       const item = await database.Item.findOne({where:{numeracao:1}})
+       const token =  await criaUsuarioAdmin()
+ 
+       const response = await request(app)
+       .put(`/item/${item.id}`)
+       .set('Authorization',`Bearer ${token}`)
+       .send({numeracao:2})
+ 
+       expect(response.status).toBe(200)
+    })
+ 
+    test('Deve conseguir realizar DELETE de Item', async()=>{
+       const item = await database.Item.findOne({where:{numeracao:2}})
+       const token = await criaUsuarioAdmin()
+ 
+       const response =  await request(app)
+       .delete(`/item/${item.id}`)
+       .set('Authorization',`Bearer ${token}`)
+       
+       expect(response.status).toBe(200)
+    })
+ })
+ 
  
