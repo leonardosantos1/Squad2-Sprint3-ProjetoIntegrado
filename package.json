@@ -1,52 +1,52 @@
 {
-    "name": "Squad2-Sprint3-ProjetoIntegrado",
-    "version": "1.0.0",
-    "description": "Projeto integrado da squade 2 na sprint 3",
-    "main": "index.js",
-    "scripts": {
-        "start": "ts-node ./Servidor/api/server.ts",
-        "dev": "ts-node-dev ./Servidor/api/server.ts",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/leonardosantos1/Squad2-Sprint3-ProjetoIntegrado.git"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/leonardosantos1/Squad2-Sprint3-ProjetoIntegrado/issues"
-    },
-    "homepage": "https://github.com/leonardosantos1/Squad2-Sprint3-ProjetoIntegrado#readme",
-    "dependencies": {
-        "axios": "^0.21.1",
-        "bcrypt": "^5.0.1",
-        "camelcase-keys": "^6.2.2",
-        "dotenv": "^8.2.0",
-        "express": "^4.17.1",
-        "jsonwebtoken": "^8.5.1",
-        "mysql2": "^2.2.5",
-        "passport": "^0.4.1",
-        "passport-http-bearer": "^1.0.1",
-        "passport-local": "^1.0.0",
-        "path": "^0.12.7",
-        "sequelize": "^6.6.2",
-        "winston": "^3.3.3"
-    },
-    "devDependencies": {
-        "@types/bcrypt": "^5.0.0",
-        "@types/express": "^4.17.12",
-        "@types/jest": "^26.0.24",
-        "@types/node": "^15.12.2",
-        "@types/supertest": "^2.0.11",
-        "jest": "^27.0.6",
-        "nodemon": "^2.0.7",
-        "sequelize-cli": "^6.2.0",
-        "supertest": "^6.1.3",
-        "ts-jest": "^27.0.3",
-        "ts-node": "^10.0.0",
-        "ts-node-dev": "^1.1.8",
-        "typescript": "^4.3.2"
-    }
+  "name": "Squad2-Sprint3-ProjetoIntegrado",
+  "version": "1.0.0",
+  "description": "Projeto integrado da squade 2 na sprint 3",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node ./Servidor/api/server.ts",
+    "dev": "ts-node-dev ./Servidor/api/server.ts",
+    "test": "NODE_ENV=test jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leonardosantos1/Squad2-Sprint3-ProjetoIntegrado.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leonardosantos1/Squad2-Sprint3-ProjetoIntegrado/issues"
+  },
+  "homepage": "https://github.com/leonardosantos1/Squad2-Sprint3-ProjetoIntegrado#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bcrypt": "^5.0.1",
+    "camelcase-keys": "^6.2.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.2.5",
+    "passport": "^0.4.1",
+    "passport-http-bearer": "^1.0.1",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "sequelize": "^6.6.2",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/express": "^4.17.12",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^15.12.2",
+    "@types/supertest": "^2.0.11",
+    "jest": "^27.0.6",
+    "nodemon": "^2.0.7",
+    "sequelize-cli": "^6.2.0",
+    "supertest": "^6.1.3",
+    "ts-jest": "^27.0.3",
+    "ts-node": "^10.0.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.3.2"
+  }
 }
