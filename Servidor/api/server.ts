@@ -1,17 +1,7 @@
 require('dotenv').config()
 const middlewaresAutenticacao = require('./estrategiaLogin/middlewares-autenticacao')
-import {Request, Response, NextFunction} from 'express'
-import camelCaseKeys from 'camelcase-keys'
+const {camelCase} = require('./utils/camelCase')
 const logger = require('./config/logger')
-
-const camelCase = ()=>{
-    return function (req : Request, res : Response, next : NextFunction) {
-        req.body = camelCaseKeys(req.body, { deep: true })
-        req.params = camelCaseKeys(req.params)
-        req.query = camelCaseKeys(req.query)
-        next()
-      }
-}
 
 import express from 'express'
 const app  = express()
@@ -22,6 +12,7 @@ import rotaTipo from './routes/tipoRota'
 import rotaItem from './routes/itemRota'
 import rotaItemUsuario from './routes/itemUsuarioRota'
 import rotaReserva from './routes/reservaRota'
+import resolveip from './routes/resolveip'
 
 const {estrategiaAutenticacao} = require('./estrategiaLogin')
 
@@ -34,6 +25,7 @@ app.use('/tipo',rotaTipo)
 app.use('/item',rotaItem)
 app.use('/itemUsuario',rotaItemUsuario)
 app.use('/reserva',rotaReserva)
+app.use('/resolveip',resolveip)
 
 db.sequelize.sync().then(()=>{
     app.listen(3000,()=>{

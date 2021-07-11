@@ -23,7 +23,7 @@ passport.use(
         usernameField: 'id',
         passwordField: 'senha',
         session: false
-    },async (id:any , senha:any, done:any)=>{
+    },async (id:number , senha:any, done:any)=>{
         try {
             const login = await db.Login.findByPk(id)
             verificaUsuario(login)
