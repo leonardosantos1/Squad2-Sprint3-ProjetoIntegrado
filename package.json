@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node ./Servidor/api/server.ts",
-    "dev": "ts-node-dev ./Servidor/api/server.ts",
+    "dev": "ts-node-dev ./Servidor/api/server.ts --ignore __tests__",
     "test": "NODE_ENV=test jest"
   },
   "repository": {
