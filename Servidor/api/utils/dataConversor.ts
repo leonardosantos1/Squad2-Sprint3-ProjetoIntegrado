@@ -30,3 +30,16 @@ export function dataConversor(data:any){
         throw new Error("Erro com o formato da data 'dd/mm/aaaa hh:mm'");
     }
 }
+
+export function dataRevert(data:string, retorno:boolean) {
+    let ano = parseInt(data.substring(0, 4))
+    let mes = parseInt(data.substring(5, 7))
+    let dia = parseInt(data.substring(8, 10))
+    let hora = parseInt(data.substring(11, 13))
+    let minuto = parseInt(data.substring(14, 16))
+    if (retorno == true) {
+        return [dia, mes, ano, hora, minuto]
+    } else {
+        return `${dia}/${mes}/${ano} ${hora}:${minuto}`
+    }
+}
