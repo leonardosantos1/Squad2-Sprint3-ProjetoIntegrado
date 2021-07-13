@@ -90,7 +90,6 @@ class UsuarioController{
             logger.error(`ERRO - Requisicao PUT /usuarios/${req.params.id}  FROM: id:${req.headers.userId} nome:${req.headers.userNome}. Erro: ${error.message}`,'error')
             return res.status(400).json(retornos.retornos(false,'Atualizar usuarios',{erro:"Desculpe, mas nao foi possivel atualizar o usuario desejado!"}))
         }
-
     }
     async deletarUsuario(req:Request,res:Response){
         try{
@@ -104,7 +103,6 @@ class UsuarioController{
         }
     }
 }
-
 export default new UsuarioController()
 
 
