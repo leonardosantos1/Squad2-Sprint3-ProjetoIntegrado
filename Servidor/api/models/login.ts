@@ -39,7 +39,6 @@ module.exports = (sequelize:any, DataTypes:any) => {
       allowNull:false,
       references:{model:'usuarios', key:'id'},
       onDelete:'CASCADE',
-      
     },
   }, {
     sequelize,
