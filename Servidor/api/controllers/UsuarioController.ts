@@ -30,32 +30,31 @@ class UsuarioController{
     async inserirUsuario(req:Request,res:Response){
         try{
             if(req.is('json')){
+                let cpfvalido = cpf.isValid(req.body.cpf)
                 if(req.body.senha){
-                    if(cpf.isValid(req.body.cpf)){
+                    if(cpfvalido){
                         const usuario = await database.Usuario.create({nome: req.body.nome, cpf: req.body.cpf})
                         const senhaCripto = await senhaHash.adicionaSenha(req)
-                        await database.Login.create({usuarioId: usuario.id, senha: senhaCripto})
-                        logger.log('info',`Requisicao POST /usuarios. Criar usuario: id:${usuario.id}`)
-                        logger.log('info',`Requisicao POST /login. Criar usuario: id:${usuario.id}`)
+                        const login = await database.Login.create({usuarioId: usuario.id, senha: senhaCripto})
+                        logger.log('info',`Requisicao POST /usuarios. Criar usuario:id:id${usuario.id}, nome:${usuario.nome}, cpf:${usuario.cpf}`)
+                        logger.log('info',`Requisicao POST /login. Criar usuario: id:id${usuario.id}, nome:${usuario.nome}, cpf:${usuario.cpf}, login id:${login.id}`)
                         return res.status(201).json(retornos.retornos(true,'Usuario e login criado',{"Login":usuario.cpf}))
                     }else{
-                        logger.error(`ERRO - Requisicao POST /usuarios. Erro: CPF inválido`,'error')
-                        throw new Error("Desculpe, mas nao foi possivel inserir um novo usuario!")
+                        throw new Error(`CPF:${req.body.cpf} invalido`)
                     }
                 }else{
-                    if(cpf.isValid(req.body.cpf)){
+                    if(cpfvalido){
                         const usuario = await database.Usuario.create(req.body)
-                        logger.log('info',`Requisicao POST /usuarios. Criar usuario: id:${usuario.id}`)
+                        logger.log('info',`Requisicao POST /usuarios. Criar usuario: id:id${usuario.id}, nome:${usuario.nome}, cpf:${usuario.cpf}`)
                         return res.status(201).json(retornos.retornos(true,'Usuario criado',{id:usuario.id, nome:usuario.nome, cpf:usuario.cpf}))
                     }
                     else{
-                        logger.error(`ERRO - Requisicao POST /usuarios. Erro: CPF inválido`,'error')
-                        throw new Error("Desculpe, mas nao foi possivel inserir um novo usuario!")
+                        throw new Error(`CPF:${req.body.cpf} invalido`)
                     }
                 }
             }else{
-                logger.error(`ERRO - Requisicao POST /usuarios. Erro: Dados inconsistentes`,'error')
-                throw new Error ("Desculpe, mas nao foi possivel inserir um novo usuario!")
+                logger.error(`ERRO - Requisicao POST /usuarios. Erro: Dados inconsistentes - Formato errado`,'error')
+                throw new Error ("Desculpe, mas nao foi possivel inserir um novo usuario! ")
             } 
         }catch(error: any){
             logger.error(`ERRO - Requisicao POST /usuarios. Erro:${error.message}`,'error')

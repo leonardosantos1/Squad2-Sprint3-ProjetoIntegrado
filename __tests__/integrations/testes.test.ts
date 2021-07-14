@@ -1,3 +1,7 @@
+require('dotenv').config({
+   path: process.env.NODE_ENV === "test" ? ".env.test" : ".env"
+ })
+
 import request from 'supertest'
 import database from '../../Servidor/api/models'
 import app from '../../Servidor/api/app'
@@ -6,12 +10,11 @@ import criaUsuarioAdmin from '../../Servidor/api/utils/criaUsuarioAdmin'
 describe('CRUD Entidade Usuario',()=>{
     beforeAll(async()=>{
        await database.sequelize.sync()
-
-   })
+   },60000)
 
    afterAll(async()=>{
       await database.sequelize.drop()
-     })
+   },60000)
   
    test('Deve conseguir realizar GET de Usuarios', async()=>{
       const response = await request(app)
@@ -23,7 +26,7 @@ describe('CRUD Entidade Usuario',()=>{
     test('Deve conseguir realizar POST de um Usuario',async()=>{
       const response = await request(app)
       .post('/usuario/')
-      .send({nome:'Usuario Dois', cpf:'12345678987'})
+      .send({nome:'Usuario Dois', cpf:process.env.USER_CPF})
 
       expect(response.status).toBe(201)
    })
@@ -66,12 +69,11 @@ describe('CRUD Entidade Usuario',()=>{
 describe('CRUD Entidade Tipo',()=>{
     beforeAll(async()=>{
        await database.sequelize.sync()
- 
-   })
+   },60000)
  
    afterAll(async()=>{
       await database.sequelize.drop()
-     })
+   },60000)
  
      test('Deve conseguir realizar GET de Tipos',async()=>{
        const response = await request(app)
@@ -136,11 +138,11 @@ describe('CRUD Entidade Tipo',()=>{
 
     beforeAll(async()=>{
        await database.sequelize.sync()
-    })
+    },60000)
     
     afterAll(async()=>{
        await database.sequelize.drop()
-    })
+    },60000)
  
     test('Deve conseguir realizar GET de Itens',async()=>{
        const response =  await request(app)

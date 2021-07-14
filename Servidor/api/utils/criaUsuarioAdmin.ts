@@ -1,3 +1,7 @@
+require('dotenv').config({
+    path: process.env.NODE_ENV === "test" ? ".env.test" : ".env"
+  })
+
 import request from 'supertest'
 import app from '../app'
 import database from '../models'
@@ -6,7 +10,7 @@ async function usuarioLoginAdmin(){
    var usuario = await database.Usuario.findOne({where:{nome:"admin"}})
 
    if(usuario == null || usuario == undefined){
-       usuario = await database.Usuario.create({nome:'admin',cpf:'00000000000'})
+       usuario = await database.Usuario.create({nome:'admin',cpf:process.env.USER_ADMIN_CPF})
       
        await request(app)
        .post('/login/')
