@@ -23,7 +23,7 @@ describe('CRUD Entidade Usuario',()=>{
       expect(response.status).toBe(200)
    })
 
-    test('Deve conseguir realizar POST de um Usuario',async()=>{
+   test('Deve conseguir realizar POST de um Usuario',async()=>{
       const response = await request(app)
       .post('/usuario/')
       .send({nome:'Usuario Dois', cpf:process.env.USER_CPF})
@@ -67,7 +67,7 @@ describe('CRUD Entidade Usuario',()=>{
 })
 
 describe('CRUD Entidade Tipo',()=>{
-    beforeAll(async()=>{
+   beforeAll(async()=>{
        await database.sequelize.sync()
    },60000)
  
@@ -75,14 +75,14 @@ describe('CRUD Entidade Tipo',()=>{
       await database.sequelize.drop()
    },60000)
  
-     test('Deve conseguir realizar GET de Tipos',async()=>{
+   test('Deve conseguir realizar GET de Tipos',async()=>{
        const response = await request(app)
        .get('/tipo/')
  
        expect(response.status).toBe(200)
      })
   
-     test('Deve conseguir realizar POST de Tipo', async()=>{
+   test('Deve conseguir realizar POST de Tipo', async()=>{
        const token = await criaUsuarioAdmin()
  
        const response1 =  await request(app)
@@ -99,7 +99,7 @@ describe('CRUD Entidade Tipo',()=>{
        expect(response2.status).toBe(201)
      })
  
-     test('Deve conseguir realizar GET de Tipo especifico',async()=>{
+   test('Deve conseguir realizar GET de Tipo especifico',async()=>{
        const token = await criaUsuarioAdmin()
        const tipo = await database.Tipo.findOne({where:{categoria:'sala'}})
        
@@ -110,7 +110,7 @@ describe('CRUD Entidade Tipo',()=>{
        expect(response.status).toBe(200)
      })
  
-     test('Deve conseguir realizar PUT de Tipo',async()=>{
+   test('Deve conseguir realizar PUT de Tipo',async()=>{
        const token = await criaUsuarioAdmin()
        const tipo = await database.Tipo.findOne({where:{categoria:'sala'}})
  
@@ -122,7 +122,7 @@ describe('CRUD Entidade Tipo',()=>{
        expect(response.status).toBe(200)
      })
  
-     test('Deve conseguir realizar DELETE de Tipo',async()=>{
+   test('Deve conseguir realizar DELETE de Tipo',async()=>{
        const token = await criaUsuarioAdmin()
        const tipo = await database.Tipo.findOne({where:{categoria:'projetor'}})
  
@@ -136,22 +136,22 @@ describe('CRUD Entidade Tipo',()=>{
 
  describe("CRUD da Entidade Item",()=>{
 
-    beforeAll(async()=>{
+   beforeAll(async()=>{
        await database.sequelize.sync()
     },60000)
     
-    afterAll(async()=>{
+   afterAll(async()=>{
        await database.sequelize.drop()
     },60000)
  
-    test('Deve conseguir realizar GET de Itens',async()=>{
+   test('Deve conseguir realizar GET de Itens',async()=>{
        const response =  await request(app)
        .get('/item/')
  
        expect(response.status).toBe(200)
     })
  
-    test('Deve conseguir realizar POST de Item',async()=>{
+   test('Deve conseguir realizar POST de Item',async()=>{
        const tipo = await database.Tipo.create({categoria:'mesa'})
        const token = await criaUsuarioAdmin()
  
@@ -163,7 +163,7 @@ describe('CRUD Entidade Tipo',()=>{
        expect(response.status).toBe(201)
     })
     
-    test('Deve conseguir realizar GET em um Item especifico', async()=>{
+   test('Deve conseguir realizar GET em um Item especifico', async()=>{
        const item =  await database.Item.findOne({where:{numeracao:1}})
        const token = await criaUsuarioAdmin()
  
@@ -174,7 +174,7 @@ describe('CRUD Entidade Tipo',()=>{
        expect(response.status).toBe(200)
     })
  
-    test('Deve conseguir realizar PUT de Item', async()=>{
+   test('Deve conseguir realizar PUT de Item', async()=>{
        const item = await database.Item.findOne({where:{numeracao:1}})
        const token =  await criaUsuarioAdmin()
  
@@ -186,7 +186,7 @@ describe('CRUD Entidade Tipo',()=>{
        expect(response.status).toBe(200)
     })
  
-    test('Deve conseguir realizar DELETE de Item', async()=>{
+   test('Deve conseguir realizar DELETE de Item', async()=>{
        const item = await database.Item.findOne({where:{numeracao:2}})
        const token = await criaUsuarioAdmin()
  
@@ -197,5 +197,128 @@ describe('CRUD Entidade Tipo',()=>{
        expect(response.status).toBe(200)
     })
  })
+
+describe('CRUD Entidade Login',()=>{
+   beforeAll(async()=>{
+      await database.sequelize.sync()
+  },60000)
+
+  afterAll(async()=>{
+     await database.sequelize.drop()
+    },60000)
+
+ 
+   test('Deve conseguir realizar GET de Logins', async()=>{
+     const response = await request(app)
+     .get('/login/')
+    
+     expect(response.status).toBe(200)
+  })
+  
+  test('Deve conseguir realizar POST de um Login',async()=>{
+      const usuario = await database.Usuario.create({nome:'Bob', cpf:process.env.USER_CPF})
+      const response = await request(app)
+
+     .post('/login/')
+     .send({senha:'123', usuarioId:usuario.id})
+
+     expect(response.status).toBe(201)
+  })
+   
+  test('Deve conseguir realizar PUT de um Login',async()=>{
+     const token  =  await criaUsuarioAdmin()
+     const login =  await database.Login.findOne({where:{usuarioId:'1'}})
+
+     const response = await request(app)
+     .put(`/login/${login.id}`)
+     .set('Authorization',`Bearer ${token}`)
+     .send({senha:'321'})
+
+     expect(response.status).toBe(200)
+  })
+})
+
+describe('CRUD Entidade ItemUsuario',()=>{
+   beforeAll(async()=>{
+      await database.sequelize.sync()
+  },60000)
+
+   afterAll(async()=>{
+     await database.sequelize.drop()
+   },60000)
+ 
+  test('Deve conseguir realizar GET de ItemUsuario', async()=>{
+     const response = await request(app)
+     .get('/itemUsuario/')
+    
+     expect(response.status).toBe(200)
+    })
+  
+  test('Deve conseguir realizar POST de um ItemUsuario',async()=>{
+      const tipo = await database.Tipo.create({categoria:'teclado'})
+      const item = await database.Item.create({numeracao:1, tipoId:tipo.id})
+      const usuario = await database.Usuario.create({nome:'Bob', cpf:process.env.USER_CPF})
+      const token =  await criaUsuarioAdmin()
+    
+      const response = await request(app)
+      
+     .post('/itemUsuario/')
+     .set('Authorization',`Bearer ${token}`)
+     .send({itemId: item.id, usuarioId:usuario.id})
+
+     expect(response.status).toBe(201)
+   })
+  
+  test('Deve conseguir realizar GET em um ItemUsuario especifico', async()=>{
+   const token = await criaUsuarioAdmin()
+
+   const response =  await request(app)
+   .get(`/itemUsuario/1`)
+   .set('Authorization',`Bearer ${token}`)
+
+   expect(response.status).toBe(200)
+   })
+   
+  test('Deve conseguir realizar PUT de ItemUsuario', async()=>{
+   const tipo = await database.Tipo.create({categoria:'mesa'})
+   const item = await database.Item.create({numeracao:2, tipoId:tipo.id})
+   const token =  await criaUsuarioAdmin()
+
+   const response = await request(app)
+   .put(`/itemUsuario/1`)
+   .set('Authorization',`Bearer ${token}`)
+   .send({itemId:2})
+
+   expect(response.status).toBe(200)
+   })
+
+  test('Deve conseguir realizar DELETE de ItemUsuario', async()=>{
+   const token = await criaUsuarioAdmin()
+
+   const response =  await request(app)
+   .delete(`/itemUsuario/1`)
+   .set('Authorization',`Bearer ${token}`)
+   
+   expect(response.status).toBe(200) 
+   })
+})
+
+describe('Get da entidade Resolveip',()=>{
+   beforeAll(async()=>{
+      await database.sequelize.sync()
+  },60000)
+
+  afterAll(async()=>{
+     await database.sequelize.drop()
+    },60000)
+
+  test('Deve conseguir realizar GET de Resolveip', async()=>{
+     const response = await request(app)
+     .get('/resolveip/')
+    
+     expect(response.status).toBe(200)
+  },60000)
+}) 
+
  
  

@@ -1,7 +1,7 @@
 import {Router} from 'express'
 const router = Router()
-import resolveipController from '../controllers/resolveipController'
+import resolveIpController from '../controllers/ResolveIpController'
 
-router.get('/', resolveipController.listarItens)
+router.get('/', resolveIpController.listarItens)
 
 export default router

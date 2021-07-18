@@ -2,7 +2,7 @@ import database from '../models'
 import {Request,Response} from 'express'
 const senhaHash = require('../estrategiaLogin/senhaHashController')
 const logger = require('../config/logger')
-import retornos = require('./retornosController')
+import retornos = require('../utils/retornos')
 import {cpf} from 'cpf-cnpj-validator'
 
 class UsuarioController{
