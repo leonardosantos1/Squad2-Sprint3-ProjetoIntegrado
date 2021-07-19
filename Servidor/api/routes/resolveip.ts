@@ -1,6 +1,6 @@
 import {Router} from 'express'
 const router = Router()
-import resolveIpController from '../controllers/ResolveIpController'
+import resolveIpController from '../controllers/resolveipController'
 
 router.get('/', resolveIpController.listarItens)
 
