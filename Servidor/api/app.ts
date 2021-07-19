@@ -13,7 +13,7 @@ import rotaTipo from './routes/tipoRota'
 import rotaItem from './routes/itemRota'
 import rotaItemUsuario from './routes/itemUsuarioRota'
 import rotaReserva from './routes/reservaRota'
-import resolveip from './routes/resolveIp'
+import resolveip from './routes/resolveip'
 
 const {estrategiaAutenticacao} = require('./estrategiaLogin')
 

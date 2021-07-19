@@ -302,23 +302,4 @@ describe('CRUD Entidade ItemUsuario',()=>{
    expect(response.status).toBe(200) 
    })
 })
-
-describe('Get da entidade Resolveip',()=>{
-   beforeAll(async()=>{
-      await database.sequelize.sync()
-  },60000)
-
-  afterAll(async()=>{
-     await database.sequelize.drop()
-    },60000)
-
-  test('Deve conseguir realizar GET de Resolveip', async()=>{
-     const response = await request(app)
-     .get('/resolveip/')
-    
-     expect(response.status).toBe(200)
-  },60000)
-}) 
-
- 
  
