@@ -1,7 +1,7 @@
 import database from '../models'
 import {Request,Response} from 'express'
 const logger = require('../config/logger')
-import retornos = require('./retornosController')
+import retornos = require('../utils/retornos')
 
 class TipoController {
     async listarTipos(req:Request,res:Response){

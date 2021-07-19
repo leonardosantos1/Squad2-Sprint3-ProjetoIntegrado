@@ -3,7 +3,7 @@ const senhaHash = require('../estrategiaLogin/senhaHashController')
 const jwt = require('../estrategiaLogin/tokenjwt')
 import {Request,Response} from 'express'
 const logger = require('../config/logger')
-import retornos = require('./retornosController')
+import retornos = require('../utils/retornos')
 
 class LoginController{
     async listar(req:Request,res:Response){

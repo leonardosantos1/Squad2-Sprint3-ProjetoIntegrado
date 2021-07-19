@@ -1,10 +1,10 @@
 import {Request,Response} from 'express'
 const logger = require('../config/logger')
 import axios from "axios";
-import retornos = require('./retornosController')
+import retornos = require('../utils/retornos')
 
 
-class resolveipController {
+class ResolveIpController {
     listarItens(req:Request ,res:Response){
         axios
             .get('https://resolveip.herokuapp.com/')
@@ -18,4 +18,4 @@ class resolveipController {
             });
     }
 }
-export default new resolveipController()
+export default new ResolveIpController()
