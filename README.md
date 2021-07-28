@@ -1,20 +1,8 @@
 	
 <h1 align="center">
-  <h2>API para controle de salas</h2>
+  <h2>API para controle de itens</h2>
 </h1>
 
-# Squad2-Sprint3-ProjetoIntegrado 
-## Projeto integrado da squade 2 na sprint 5
-
-Vinicius:
- -Implementou LOG
- 
-Leonardo:
- -Implementou Kubernets
- 
-Gustavo:
- -Melhoria no tratamento
- 
 Obs: Variaveis de ambiente que estao no .env!!!
 DB_USER
 DB_PASSWORD
@@ -22,8 +10,18 @@ DB_DATABASE
 DB_PORT
 DB_HOST
 
+
+Obs: Variaveis de ambiente que estao no .env!!!
+DB_USER_TEST
+DB_PASSWORD_TEST
+DB_DATABASE_TEST
+DB_PORT_TEST
+DB_HOST_TEST
+USER_ADMIN_CPF
+USER_CPF
+CHAVE_JWT
+
 -----------------------------------------------------------------------------------------------
-Projeto integrado da squade 2 na sprint 4
 
 Utilizamos o database chamado "controle"
 
@@ -43,33 +41,6 @@ Disponibilizamos coleções do Postman das tabelas:
 Usuario, Login, Tipo, Item
 
 Creio que para utilizar a colecao do Postman disponibilizada basta arrastar para dentro do Postman que aparecerá as mesma para os testes.
-
-Leonardo:
-    Refatoração de código para Typescript
-    Formatação para camelCase
-    Tratamento de erros (console.log)
-    Aplicação padrão REST nas rotas da API
-    Coleção Postman
-    Tentativa de implementação do Dockerfile
-    e  Tentativa de implementação parte Kubernetes
-
-Gustavo:
-    Tratamento de Dados
-    Ajuste de nomes de variaveis com nomes estranhos
-    Tentativa de implementação do Dockerfile e Kubernetes
-
-Vinicius:
-    Não exposicao da senha hash
-    Aplicação padrão REST nas rotas da API
-    Geração de Login Administrator
-    Conseguir efetuar login com o cpf do usuario
-    Criação de Login junto a Usuario
-    Subir Cargo Administrador
-    Tentativa de implementação do Dockerfile
-
-Os tópicos não listados ja estavam implementados em nossa API na versão anterior
-
-A parte de docker e kubernetes tentamos implementar mas no final não tivemos sucesso, deixamos um dos Dockerfiles e alguns arquivos kubernetes que utilizamos em nossas tentativas
 
 Requisicoes:
  -Cadastro usuario: {"nome":"xxxxxx", "cpf":"xxxxxxxxxxx", "senha":"xxx"}
